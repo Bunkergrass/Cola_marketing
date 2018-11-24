@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.main.service.ServiceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_zhibo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_zhibo"
+            app:setting_text="直播课堂"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_jiangshi"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_jiangshi"
+            app:setting_text="讲师"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_yiduiyi"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_yiduiyi"
+            app:setting_text="一对一服务"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_data"
+            app:setting_text="数据服务"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_gongneng"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_gongneng"
+            app:setting_text="功能服务"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_tutor"
+            app:setting_text="导师组"/>
+        <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+            android:id="@+id/sv_service_test"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_size"
+            app:setting_img="@drawable/icon_service_test"
+            app:setting_text="考核"/>
+    </LinearLayout>
+
+</ScrollView>

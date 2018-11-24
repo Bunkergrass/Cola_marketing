@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    android:padding="13dp">
+
+    <TextView
+        android:id="@+id/tv_weike_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_color_dark"
+        android:text="标题1111"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical">
+        <com.htmessage.cola_marketing.widget.RCLayout.RCImageView
+            android:id="@+id/iv_weike_header_avatar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:round_as_circle="true"
+            app:clip_background="true"
+            android:src="@drawable/default_avatar"/>
+        <TextView
+            android:id="@+id/tv_weike_header_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_dark"
+            android:gravity="center"
+            android:text="@string/nickname"/>
+        <TextView
+            android:id="@+id/tv_weike_header_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_pale"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_weike_header_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/text_color_mid" />
+    <LinearLayout
+        android:id="@+id/ll_weike_header_imgs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"/>
+
+</LinearLayout>

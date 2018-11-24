@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="LightBlue">#80bfff</color>
+    <color name="Blue2">#57abff</color>
+    <color name="blue">#2196F3</color>
+    <color name="darkBlue">#5490D6</color>
+    <color name="Gray">#BDBDBD</color>
+    <color name="DarkGray">#7a8c99</color>
+    <color name="LightGray">#e6e9ec</color>
+    <color name="Light">#f0f2f5</color>
+    <color name="Red">#ff351f</color>
+    <color name="green">#6FCD78</color>
+    <color name="green2">#85DA92</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="orange">#FA925E</color>
+    <color name="orange_vivid">#E77D0C</color>
+    <color name="orange2">#F68714</color>
+    <color name="yellow">#ffbd40</color>
+    <color name="accent_red">#FF5722</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="error_item_color">#FFE6E6</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed">#666667</color>
+    <color name="text_color_dark">#333333</color>
+    <color name="text_color_mid">#666666</color>
+    <color name="text_color_light">#999999</color>
+    <color name="text_color_pale">#A8A8A8</color>
+    <color name="color_divider">#f0f2f5</color>
+    <color name="shadow">#50000000</color>
+</resources>

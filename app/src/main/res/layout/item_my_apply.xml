@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.htmessage.cola_marketing.widget.RCLayout.RCRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/white"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    app:round_corner="5dp"
+    app:clip_background="true">
+
+    <ImageView
+        android:id="@+id/iv_apply"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/default_image"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tv_apply_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_apply"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text_color_dark"
+        android:textSize="15sp"
+        android:text="商品名称"/>
+
+    <TextView
+        android:id="@+id/tv_apply_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_apply_name"
+        android:layout_below="@id/tv_apply_name"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:textColor="@color/text_color_light"
+        android:maxEms="15"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
+
+    <Button
+        android:id="@+id/btn_apply_detail"
+        android:layout_width="90dp"
+        android:layout_height="28dp"
+        android:layout_alignStart="@id/tv_apply_desc"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_radious_blue"
+        android:enabled="false"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:text="发布商品" />
+
+    <ImageView
+        android:id="@+id/iv_apply_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/img_me_daishenhe"
+        android:adjustViewBounds="true"/>
+
+</com.htmessage.cola_marketing.widget.RCLayout.RCRelativeLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/iv_task_schedule"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/default_image"/>
+
+    <TextView
+        android:id="@+id/tv_task_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"
+        android:text="@string/test_text"/>
+
+</LinearLayout>

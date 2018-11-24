@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MainActivity-->
+    <dimen name="height_top_bar">56dp</dimen>
+    <dimen name="BottomNavigation">56dp</dimen>
+    <!-- -->
+    <dimen name="emoji_size">18sp</dimen>
+    <dimen name="setting_size">60dp</dimen>
+    <!--big title-->
+    <dimen name="bigTitle_size">220dp</dimen>
+
+    <dimen name="sider_bar_textsize">16sp</dimen>
+
+    <!--chat-->
+    <dimen name="height_shrink">40dp</dimen>
+    <dimen name="actionBarSize">48dp</dimen>
+    <dimen name="size_avatar">42dp</dimen>
+    <dimen name="height_list_item">54dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="chat_nick_margin_left">17dp</dimen>
+    <dimen name="chat_nick_text_size">12sp</dimen>
+</resources>

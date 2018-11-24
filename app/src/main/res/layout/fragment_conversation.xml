@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_error_item"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@color/error_item_color">
+
+        <ImageView
+            android:layout_marginStart="9dp"
+            android:id="@+id/iv_neterror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_me_shanchu"/>
+
+        <TextView
+            android:id="@+id/tv_connect_errormsg"
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/can_not_connect_chat_server_connection"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iv_neterror" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:dividerHeight="1px"
+        android:divider="#d4d4d4" />
+
+</LinearLayout>

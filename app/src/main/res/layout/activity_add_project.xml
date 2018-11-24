@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.myLists.myProject.AddProjectActivity">
+
+    <include layout="@layout/layout_title_bar"/>
+
+    <LinearLayout
+        android:id="@+id/ll_add_project"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_list_item"
+            app:key_text="项目名称"
+            app:hint_text=""/>
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_project_team"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_list_item"
+            app:key_text="团队介绍"
+            app:hint_text=""/>
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_project_desc"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_list_item"
+            app:key_text="案例详情"
+            app:hint_text=""/>
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_project_scene"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_list_item"
+            app:key_text="投放场景"
+            app:hint_text=""/>
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_project_support"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_list_item"
+            app:key_text="协调与支持"
+            app:hint_text=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+            <Button
+                android:id="@+id/btn_add_project"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="确认添加"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@color/LightBlue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</LinearLayout>

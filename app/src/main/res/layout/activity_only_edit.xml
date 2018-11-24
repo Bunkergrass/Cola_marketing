@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.homepageFunc.xiaoshou.OnlyEditActivity">
+
+    <include layout="@layout/layout_title_bar"/>
+
+    <LinearLayout
+        android:id="@+id/ll_edit_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            app:key_text="商品名称"
+            app:hint_text=""/>
+
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            app:key_text="商品价格"
+            app:hint_text=""/>
+
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_stock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            app:key_text="库存量"
+            app:hint_text=""/>
+
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:key_text="添加描述"
+            app:hint_text=""/>
+
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:key_text="添加主图"
+            app:hint_text=""/>
+
+        <com.htmessage.cola_marketing.widget.HintSetView
+            android:id="@+id/hsv_only_imgs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:key_text="添加图片"
+            app:hint_text=""/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_only_confirm"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_radious_blue"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="确认"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_choose_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

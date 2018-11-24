@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    tools:context=".activity.myLists.myProject.ProjectTeamFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/stroke_bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_dark"
+            android:text="团队名称"/>
+        <EditText
+            android:id="@+id/et_team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:gravity="right"
+            android:background="@null"
+            android:hint="请输入团队名称" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/stroke_bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_dark"
+            android:text="团队简介"/>
+        <EditText
+            android:id="@+id/et_team_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:gravity="right"
+            android:background="@null"
+            android:hint="请输入团队简介" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="13dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_dark"
+            android:text="上传团队相片"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:text="最多上传3张"/>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/ll_team_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:numColumns="3" />
+
+</LinearLayout>

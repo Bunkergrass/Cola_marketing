@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.htmessage.cola_marketing.widget.RCLayout.RCRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="128dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    app:round_corner="5dp"
+    app:clip_background="true">
+
+    <ImageView
+        android:id="@+id/iv_market"
+        android:layout_width="128dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/default_image"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tv_market_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_market"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text_color_dark"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_market_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_market_name"
+        android:layout_toEndOf="@id/iv_market"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="15dp"
+        android:textSize="13sp"
+        android:textColor="@color/text_color_light"
+        android:maxEms="15"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@id/iv_market"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/tv_market_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textSize="16sp"
+            android:textColor="@color/orange"
+            android:text="43960"/>
+
+        <TextView
+            android:id="@+id/tv_market_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:text="销量 44350"/>
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:id="@+id/tv_market_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/LightBlue"
+            android:text="商品销售页>>"/>
+
+    </LinearLayout>
+
+</com.htmessage.cola_marketing.widget.RCLayout.RCRelativeLayout>

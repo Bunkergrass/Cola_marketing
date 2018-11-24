@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".activity.myLists.myProject.ProjectDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/stroke_bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_dark"
+            android:text="项目名称"/>
+        <EditText
+            android:id="@+id/et_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:gravity="right"
+            android:background="@null"
+            android:hint="请输入项目名称" />
+    </LinearLayout>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_project_start"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        app:key_text="开始时间"
+        app:hint_text=""/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_project_end"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        app:key_text="结束时间"
+        app:hint_text=""/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/stroke_bottom"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_dark"
+            android:text="项目描述"/>
+        <EditText
+            android:id="@+id/et_project_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_light"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:gravity="right"
+            android:background="@null"
+            android:hint="请输入项目描述" />
+    </LinearLayout>
+
+</LinearLayout>

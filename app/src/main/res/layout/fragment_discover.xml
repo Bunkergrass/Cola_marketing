@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.main.discover.DiscoverFragment">
+
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_dis_friendship"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:setting_img="@drawable/icon_found_pengyouquan"
+        app:setting_text="朋友圈"/>
+
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_dis_scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:setting_img="@drawable/icon_found_scan"
+        app:setting_text="扫一扫"/>
+
+</LinearLayout>

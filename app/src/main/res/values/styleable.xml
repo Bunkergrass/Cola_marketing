@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwitchButton">
+        <attr name="switchOpenImage" format="reference"/>
+        <attr name="switchCloseImage" format="reference"/>
+        <attr name="switchStatus">
+            <enum name="open" value="0"/>
+            <enum name="close" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SwipyRefreshLayout">
+        <attr name="direction">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="both" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ChatExtendMenu">
+        <attr name="numColumns" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SettingsView">
+        <attr name="setting_text" format="string"/>
+        <attr name="setting_img" format="reference"/>
+        <attr name="show_image" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="HintSetView">
+        <attr name="key_text" format="string"/>
+        <attr name="hint_text" format="string"/>
+        <attr name="editable" format="boolean"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".activity.myLists.myApplies.MyAppliesActivity">
+    <include layout="@layout/layout_title_bar"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_applies"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/white"
+        app:tabBackground="@color/transparent"
+        app:tabTextColor="@color/text_color_light"
+        app:tabSelectedTextColor="@color/LightBlue"
+        app:tabIndicatorColor="@color/LightBlue"/>
+
+    <com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout
+        android:id="@+id/srl_applies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:direction="both">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_applies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout>
+
+
+</LinearLayout>

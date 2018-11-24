@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stroke_top"
+    android:padding="13dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical">
+        <com.htmessage.cola_marketing.widget.RCLayout.RCImageView
+            android:id="@+id/iv_weike_comments_avatar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:round_as_circle="true"
+            app:clip_background="true"
+            android:src="@drawable/default_avatar"/>
+        <TextView
+            android:id="@+id/tv_weike_comments_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_dark"
+            android:gravity="center"
+            android:text="@string/nickname"/>
+        <TextView
+            android:id="@+id/tv_weike_comments_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/text_color_pale"/>
+        <View
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+        <ImageView
+            android:id="@+id/iv_weike_comments_fabulous"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:padding="2dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/icon_fabulous2" />
+        <TextView
+            android:id="@+id/tv_weike_comments_fabulous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_mid"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/iv_weike_comments_reply"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:padding="2dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/icon_reply"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_weike_comments_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/text_color_mid"/>
+
+    <ListView
+        android:id="@+id/lv_weike_inside"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp
+"
+        android:background="#f0f2f5"
+        android:divider="@null"
+        android:fastScrollEnabled="false"/>
+
+</LinearLayout>

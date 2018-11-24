@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".activity.main.my.MyAccountFragment">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:background="@color/LightBlue">
+        <ImageView
+            android:id="@+id/iv_my_avatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/stroke_round"
+            android:padding="5dp" />
+        <TextView
+            android:id="@+id/tv_my_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textSize="17sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:background="@color/white"
+        android:gravity="center">
+        <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
+            android:id="@+id/hfv_personal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:setting_img="@drawable/icon_me_presonal"
+            app:setting_text="个人资料"/>
+        <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
+            android:id="@+id/hfv_wallet"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:setting_img="@drawable/icon_me_wallet"
+            app:setting_text="钱包"/>
+        <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
+            android:id="@+id/hfv_setting"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:setting_img="@drawable/icon_me_setup"
+            app:setting_text="设置"/>
+    </LinearLayout>
+
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_projects_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_img="@drawable/icon_me_list"
+        app:setting_text="项目列表"/>
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_my_applys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_img="@drawable/icon_me_shenqing"
+        app:setting_text="我的申请"/>
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_my_markets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_img="@drawable/icon_me_xiaoshou"
+        app:setting_text="我的销售"/>
+
+</LinearLayout>
