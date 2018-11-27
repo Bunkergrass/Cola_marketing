@@ -73,6 +73,24 @@ public class ProjectTeamFragment extends Fragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
+        final AddProjectActivity activity = (AddProjectActivity) getActivity();
+        if (activity != null) {
+            activity.showRightTextView("保存", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.pathList = pathList;
+                    activity.project.setTeam_name(et_name.getText().toString());
+                    activity.project.setTeam(et_intro.getText().toString());
+                    activity.onBackPressed();
+                }
+            });
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image

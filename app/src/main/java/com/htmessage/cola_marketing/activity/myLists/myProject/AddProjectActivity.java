@@ -133,7 +133,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.hsv_project_name:
                 ll_activity.setVisibility(View.GONE);
-                replaceFragment(detailFragment);
+//                replaceFragment(detailFragment);
+                addFragment(detailFragment);
                 fl_content.setVisibility(View.VISIBLE);
                 break;
             case R.id.hsv_project_scene:
@@ -144,7 +145,8 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.hsv_project_team:
                 ll_activity.setVisibility(View.GONE);
-                replaceFragment(teamFragment);
+//                replaceFragment(teamFragment);
+                addFragment(teamFragment);
                 fl_content.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_add_project:
@@ -178,6 +180,18 @@ public class AddProjectActivity extends BaseActivity implements View.OnClickList
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fl_content, fragment);
+        transaction.commit();
+    }
+
+    private void addFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (fragmentManager.findFragmentById(R.id.fl_content) != null)
+            transaction.hide(fragmentManager.findFragmentById(R.id.fl_content));
+        if (fragment.isAdded())
+            transaction.show(fragment);
+        else
+            transaction.add(R.id.fl_content, fragment);
         transaction.commit();
     }
 

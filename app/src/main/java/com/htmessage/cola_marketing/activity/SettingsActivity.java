@@ -28,6 +28,7 @@ import com.htmessage.cola_marketing.utils.Param;
 import com.htmessage.cola_marketing.widget.HTAlertDialog;
 import com.htmessage.cola_marketing.widget.SwitchButton;
 import com.htmessage.sdk.client.HTClient;
+import com.jrmf360.tools.manager.CusActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -363,7 +364,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                         break;
                     case 1:
                         HTApp.getInstance().finishActivities();
-//                        CusActivityManager.getInstance().finishAllActivity();
+                        CusActivityManager.getInstance().finishAllActivity();
                         LocalUserManager.getInstance().saveVersionDialog(false);
                         //杀死该应用进程
                         android.os.Process.killProcess(android.os.Process.myPid());
@@ -388,9 +389,9 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 pd.dismiss();
                 HTApp.getInstance().setUserJson(null);
                 HTApp.getInstance().finishActivities();
-//                HTApp.getInstance().clearThirdToken();
+                HTApp.getInstance().clearThirdToken();
                 LocalUserManager.getInstance().saveVersionDialog(false);
-//                CusActivityManager.getInstance().finishAllActivity();
+                CusActivityManager.getInstance().finishAllActivity();
                 startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
                 finish();
             }

@@ -22,10 +22,14 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.github.promeg.pinyinhelper.Pinyin;
+import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.addfriends.invitefriend.ContactInfo;
 import com.htmessage.cola_marketing.domain.User;
+import com.jrmf360.rplib.JrmfRpClient;
+import com.jrmf360.rplib.http.model.BaseModel;
+import com.jrmf360.tools.http.OkHttpModelCallBack;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -494,28 +498,28 @@ public class CommonUtils {
      * 金融魔方Utils
      */
     public static void upDateRedAvatarUrl(Activity activity,String nick, String avatar) {
-//        if (TextUtils.isEmpty(nick)) {
-//            nick = HTApp.getInstance().getUsername();
-//        }
-//        if (TextUtils.isEmpty(avatar)) {
-//            avatar = HTApp.getInstance().getUserAvatar();
-//        }
-//        JrmfRpClient.updateUserInfo(activity,HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), nick, avatar, new OkHttpModelCallBack<BaseModel>() {
-//            @Override
-//            public void onSuccess(BaseModel baseModel) {
-//                boolean success = baseModel.isSuccess();
-//                if (success) {
-//                    Log.d(TAG, "----更新魔方红包信息成功");
-//                } else {
-//                    Log.d(TAG, "----更新魔方红包信息失败");
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(String s) {
-//                Log.d(TAG, "----更新魔方红包信息失败");
-//            }
-//        });
+        if (TextUtils.isEmpty(nick)) {
+            nick = HTApp.getInstance().getUsername();
+        }
+        if (TextUtils.isEmpty(avatar)) {
+            avatar = HTApp.getInstance().getUserAvatar();
+        }
+        JrmfRpClient.updateUserInfo(activity,HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), nick, avatar, new OkHttpModelCallBack<BaseModel>() {
+            @Override
+            public void onSuccess(BaseModel baseModel) {
+                boolean success = baseModel.isSuccess();
+                if (success) {
+                    Log.d(TAG, "----更新魔方红包信息成功");
+                } else {
+                    Log.d(TAG, "----更新魔方红包信息失败");
+                }
+            }
+
+            @Override
+            public void onFail(String s) {
+                Log.d(TAG, "----更新魔方红包信息失败");
+            }
+        });
     }
 
 }

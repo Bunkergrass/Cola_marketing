@@ -102,7 +102,20 @@ public class HTConstant {
     //商品地址 和商城
     public static final String baseGoodsUrl = "http://klshop.kakusi.cn/";
 
-
+    //魔方互动的SDK的SECRET
+    public static final String MOFANG_SECRET = "1efce623-db09-4566-8f50-72ae69a5b6e7";    //81be0c5c-2e51-4303-9c6d-422208a696f5 //1efce623-db09-4566-8f50-72ae69a5b6e7
+    //基金的baseurl
+    public static final String BASE_YINHANGJIJIN_URL = "http://openapi.yilucaifu.com/#/fundindex";
+    //基金的KEY
+    public static final String MOFANG_KEY = "saikun";
+    //基金SECRET
+    public static final String MOFANG_SECRET1 = "c8d994c2e6f824eb9fc54e49c0d771c2";
+    //保险超市的baseurl
+    public static final String BASE_BAOXIANCHAOSHI_URL = "https://open.yilucaifu.com/insurance/sdk/myAccountChannel.html";
+    //保险超市的key
+    public static final String SAIKUN_BAOXIANCHAOSHI_KEY_ONLINE = "saikun";
+    //保险超市的Secret
+    public static final String MOFANG_SECRET_BAOXIANCHAOSHI_ONLINE = "c8d994c2e6f824eb9fc54e49c0d771c2";
 
     //音视频相关 anyrtc
     public static final String DEVELOPERID = "18567631";

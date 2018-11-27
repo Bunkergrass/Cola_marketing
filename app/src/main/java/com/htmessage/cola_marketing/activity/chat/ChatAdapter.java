@@ -29,6 +29,7 @@ import com.htmessage.cola_marketing.activity.chat.group.GroupNoticeMessageUtils;
 import com.htmessage.cola_marketing.activity.chat.location.GdMapActivity;
 import com.htmessage.cola_marketing.activity.chat.video.ChatViewVideo;
 import com.htmessage.cola_marketing.activity.chat.voice.VoicePlayClickListener;
+import com.htmessage.cola_marketing.activity.contacts.details.UserDetailsActivity;
 import com.htmessage.cola_marketing.domain.User;
 import com.htmessage.cola_marketing.manager.ContactsManager;
 import com.htmessage.cola_marketing.utils.ACache;
@@ -314,7 +315,7 @@ public class ChatAdapter extends BaseAdapter {
                 JSONObject jsonObject = htMessage.getAttributes();
                 if (jsonObject != null && chatType != MessageUtils.CHAT_GROUP) {
                     //显示联系人详细信息
-                    //context.startActivity(new Intent(context, UserDetailsActivity.class).putExtra(HTConstant.KEY_USER_INFO, jsonObject.toJSONString()));
+                    context.startActivity(new Intent(context, UserDetailsActivity.class).putExtra(HTConstant.KEY_USER_INFO, jsonObject.toJSONString()));
                 }
             }
         });

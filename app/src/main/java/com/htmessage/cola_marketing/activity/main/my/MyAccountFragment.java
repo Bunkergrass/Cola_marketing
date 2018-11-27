@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.htmessage.cola_marketing.HTApp;
+import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.SettingsActivity;
 import com.htmessage.cola_marketing.activity.main.my.profile.ProfileActivity;
@@ -20,6 +21,7 @@ import com.htmessage.cola_marketing.activity.main.widget.SettingsView;
 import com.htmessage.cola_marketing.activity.myLists.myApplies.MyAppliesActivity;
 import com.htmessage.cola_marketing.activity.myLists.myMarkets.MyMarketsActivity;
 import com.htmessage.cola_marketing.activity.myLists.myProject.MyProjectActivity;
+import com.jrmf360.walletlib.JrmfWalletClient;
 
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
@@ -67,10 +69,10 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 startActivity(new Intent(getActivity(), ProfileActivity.class));
                 break;
             case R.id.hfv_wallet:
-//                JrmfWalletClient.intentWallet(getActivity(),
-//                        HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(),
-//                        HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_NICK),
-//                        HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_AVATAR));
+                JrmfWalletClient.intentWallet(getActivity(),
+                        HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(),
+                        HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_NICK),
+                        HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_AVATAR));
                 break;
             case R.id.hfv_setting:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));

@@ -65,6 +65,10 @@ dependencies {
     //其他
     implementation 'com.github.promeg:tinypinyin:1.0.0'
     implementation 'com.alibaba:fastjson:1.2.49'
+    //金融魔方
+    api project(':jrmfwalletlib')
+    api project(':jrmfwalletpaylib')
+    api project(':jrmfrplib')
     //auto
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -73,7 +77,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('libs/okio-1.13.0.jar')
-    implementation files('libs/okhttp-3.11.0.jar')
-    implementation files('libs/ht_mleke1019.jar')//
+
 }

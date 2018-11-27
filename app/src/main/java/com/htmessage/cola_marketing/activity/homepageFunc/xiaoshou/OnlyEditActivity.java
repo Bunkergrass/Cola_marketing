@@ -32,6 +32,7 @@ import com.htmessage.cola_marketing.widget.HintSetView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OnlyEditActivity extends BaseActivity {
     private HintSetView hsv_name,hsv_price,hsv_stock,hsv_main,hsv_imgs,hsv_desc;
@@ -56,6 +57,7 @@ public class OnlyEditActivity extends BaseActivity {
         price = getIntent().getStringExtra("price");
         name = getIntent().getStringExtra("name");
         stock = getIntent().getStringExtra("stock");
+
         initView();
         requestGoodsImgs();
     }
@@ -87,7 +89,7 @@ public class OnlyEditActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ll_main.setVisibility(View.GONE);
-                replaceFragment(chooseFragment1, strings,false);
+                addFragment(chooseFragment1, strings,false);
                 fl_fragment.setVisibility(View.VISIBLE);
             }
         });
@@ -95,7 +97,7 @@ public class OnlyEditActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ll_main.setVisibility(View.GONE);
-                replaceFragment(chooseFragment9,strings,true);
+                addFragment(chooseFragment9,strings,true);
                 fl_fragment.setVisibility(View.VISIBLE);
             }
         });
@@ -124,6 +126,23 @@ public class OnlyEditActivity extends BaseActivity {
         transaction.commit();
     }
 
+    private void addFragment(Fragment fragment,String[] data,boolean isPics) {
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("data",data);
+        bundle.putBoolean("isPics",isPics);
+        fragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (fragmentManager.findFragmentById(R.id.fl_choose_fragment) != null)
+            transaction.hide(fragmentManager.findFragmentById(R.id.fl_choose_fragment));
+        if (fragment.isAdded())
+            transaction.show(fragment);
+        else
+            transaction.add(R.id.fl_choose_fragment, fragment);
+        transaction.commit();
+    }
+
     @Override
     public void back(View view) {
         onBackPressed();
@@ -134,7 +153,6 @@ public class OnlyEditActivity extends BaseActivity {
         if (fl_fragment.getVisibility() == View.VISIBLE) {
             fl_fragment.setVisibility(View.GONE);
             ll_main.setVisibility(View.VISIBLE);
-
             hideRightView();
         } else
             super.onBackPressed();

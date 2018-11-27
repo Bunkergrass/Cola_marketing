@@ -38,7 +38,27 @@ public class ProjectDetailFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
 
+        final AddProjectActivity activity = (AddProjectActivity) getActivity();
+        if (activity != null)
+            activity.showRightTextView("保存", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!et_project_name.getText().toString().isEmpty() || dates[1].compareTo(dates[0]) > 0) {
+                        activity.project.setExplain_name(et_project_name.getText().toString());
+                        activity.project.setExplain_desc(et_project_desc.getText().toString());
+                        activity.project.setExplain_start(dates[0]);
+                        activity.project.setExplain_end(dates[1]);
+                        activity.onBackPressed();
+                    } else {
+                        Toast.makeText(getActivity(),"结束时间不得小于开始时间",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+    }
 
     private void initView(View root) {
         final AddProjectActivity activity = (AddProjectActivity) getActivity();

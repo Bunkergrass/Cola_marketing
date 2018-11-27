@@ -35,6 +35,26 @@ public class ChooseImageFragment extends Fragment {
 
     String[] imgs;
     boolean isPics;
+    ChooseAdapter adapter;
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        final OnlyEditActivity activity = (OnlyEditActivity) getActivity();
+        if (activity != null) {
+            activity.showRightTextView("保存", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String nameList = adapter.choosenList.toString();
+                    if (isPics)
+                        activity.pics = nameList.substring(1,nameList.length()-1);
+                    else
+                        activity.main_pic = nameList.substring(1,nameList.length()-1);
+                    activity.onBackPressed();
+                }
+            });
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +77,7 @@ public class ChooseImageFragment extends Fragment {
         gridView = root.findViewById(R.id.rv_choose_img);
 
         GridLayoutManager manager = new GridLayoutManager(getActivity(),4);
-        final ChooseAdapter adapter = new ChooseAdapter(getActivity(), Arrays.asList(imgs));
+        adapter = new ChooseAdapter(getActivity(), Arrays.asList(imgs));
         gridView.setLayoutManager(manager);
         gridView.setAdapter(adapter);
 

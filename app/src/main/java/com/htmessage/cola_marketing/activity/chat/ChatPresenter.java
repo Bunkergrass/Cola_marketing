@@ -51,6 +51,9 @@ import com.htmessage.sdk.model.HTMessageLocationBody;
 import com.htmessage.sdk.model.HTMessageVideoBody;
 import com.htmessage.sdk.model.HTMessageVoiceBody;
 import com.htmessage.sdk.utils.MessageUtils;
+import com.jrmf360.rplib.JrmfRpClient;
+import com.jrmf360.rplib.bean.EnvelopeBean;
+import com.jrmf360.rplib.bean.TransAccountBean;
 
 import org.anyrtc.meet_kit.RTMeetKit;
 
@@ -186,9 +189,7 @@ public class ChatPresenter implements ChatContract.Presenter {
             }
             HTClient.getInstance().chatManager().sendCmdMessage(cmdMessage, new HTChatManager.HTMessageCallBack() {
                 @Override
-                public void onProgress() {
-
-                }
+                public void onProgress() {}
 
                 @Override
                 public void onSuccess() {
@@ -202,7 +203,6 @@ public class ChatPresenter implements ChatContract.Presenter {
                             chatView.refreshListView();
                         }
                     });
-
                 }
 
                 @Override
@@ -406,20 +406,20 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     @Override
     public void sendRedPackage() {
-//        if (chatType == MessageUtils.CHAT_GROUP) {
-//            JrmfRpClient.sendGroupEnvelopeForResult(getActivity(), chatTo,
-//                    HTApp.getInstance().getUsername(),
-//                    HTApp.getInstance().getThirdToken(),
-//                    getCacheJsonList(chatTo).size(),
-//                    HTApp.getInstance().getUserNick(),
-//                    HTApp.getInstance().getUserAvatar(), REQUEST_CODE_SELECT_RP);
-//        } else {
-//            JrmfRpClient.sendSingleEnvelopeForResult(getActivity(), chatTo,
-//                    HTApp.getInstance().getUsername(),
-//                    HTApp.getInstance().getThirdToken(),
-//                    HTApp.getInstance().getUserNick(),
-//                    HTApp.getInstance().getUserAvatar(), REQUEST_CODE_SELECT_RP);
-//        }
+        if (chatType == MessageUtils.CHAT_GROUP) {
+            JrmfRpClient.sendGroupEnvelopeForResult(getActivity(), chatTo,
+                    HTApp.getInstance().getUsername(),
+                    HTApp.getInstance().getThirdToken(),
+                    getCacheJsonList(chatTo).size(),
+                    HTApp.getInstance().getUserNick(),
+                    HTApp.getInstance().getUserAvatar(), REQUEST_CODE_SELECT_RP);
+        } else {
+            JrmfRpClient.sendSingleEnvelopeForResult(getActivity(), chatTo,
+                    HTApp.getInstance().getUsername(),
+                    HTApp.getInstance().getThirdToken(),
+                    HTApp.getInstance().getUserNick(),
+                    HTApp.getInstance().getUserAvatar(), REQUEST_CODE_SELECT_RP);
+        }
     }
 
     @Override
@@ -461,12 +461,12 @@ public class ChatPresenter implements ChatContract.Presenter {
             }
             recUseravatar = user.getAvatar();
         }
-//        JrmfRpClient.transAccountForResult(getActivity(), chatTo,
-//                HTApp.getInstance().getUsername(),
-//                HTApp.getInstance().getThirdToken(),
-//                HTApp.getInstance().getUserNick(),
-//                HTApp.getInstance().getUserAvatar(),
-//                recUsername, recUseravatar, REQUEST_CODE_SELECT_TRANSFER);
+        JrmfRpClient.transAccountForResult(getActivity(), chatTo,
+                HTApp.getInstance().getUsername(),
+                HTApp.getInstance().getThirdToken(),
+                HTApp.getInstance().getUserNick(),
+                HTApp.getInstance().getUserAvatar(),
+                recUsername, recUseravatar, REQUEST_CODE_SELECT_TRANSFER);
     }
 
     @Override
@@ -497,7 +497,7 @@ public class ChatPresenter implements ChatContract.Presenter {
         intent.putExtra("isOutgoing", true);
         intent.putExtra("userId", chatTo);
         startActivityForResult(intent,REQUEST_CODE_VIOCE_CALL);
-        //startActivity(intent);
+        startActivity(intent);
     }
 
     /**
@@ -579,16 +579,16 @@ public class ChatPresenter implements ChatContract.Presenter {
                     }
                     break;
                 case REQUEST_CODE_SELECT_RP:
-//                    if (data != null) {
-//                        EnvelopeBean singleRpbean = JrmfRpClient.getEnvelopeInfo(data);
-//                        sendRedMessage(singleRpbean);
-//                    }
+                    if (data != null) {
+                        EnvelopeBean singleRpbean = JrmfRpClient.getEnvelopeInfo(data);
+                        sendRedMessage(singleRpbean);
+                    }
                     break;
                 case REQUEST_CODE_SELECT_TRANSFER:
-//                    if (data != null) {
-//                        TransAccountBean transAccountBean = JrmfRpClient.getTransAccountBean(data);
-//                        sendTransferAccountsMessage(transAccountBean);
-//                    }
+                    if (data != null) {
+                        TransAccountBean transAccountBean = JrmfRpClient.getTransAccountBean(data);
+                        sendTransferAccountsMessage(transAccountBean);
+                    }
                     break;
                 case REQUEST_CODE_VIDEO_CALL:
                     if (data != null){
@@ -606,24 +606,24 @@ public class ChatPresenter implements ChatContract.Presenter {
         }
     }
 
-//    public void sendRedMessage(EnvelopeBean singleRpbean) {
-//        extJSON.put("action", 10001); //@{@"action":@"10001",@"envId":envId,@"envName":envName,@"envMsg":envMsg}
-//        extJSON.put("envId", singleRpbean.getEnvelopesID());
-//        extJSON.put("envName", chatView.getBaseActivity().getString(R.string.red_content));
-//        extJSON.put("envMsg", singleRpbean.getEnvelopeMessage());
-//        HTMessage htMessage = HTMessage.createTextSendMessage(chatTo, chatView.getBaseActivity().getString(R.string.app_red_message));
-//        sendMessage(htMessage);
-//    }
-//
-//
-//    public void sendTransferAccountsMessage(TransAccountBean singleRpbean) {
-//        extJSON.put("action", 10002);//@"action":@"10002",@"transferId":transferId,@"amountStr":amountStr,@"msg":msg
-//        extJSON.put("transferId", singleRpbean.getTransferOrder());
-//        extJSON.put("amountStr", singleRpbean.getTransferAmount());
-//        extJSON.put("msg", singleRpbean.getTransferDesc());
-//        HTMessage htMessage = HTMessage.createTextSendMessage(chatTo, chatView.getBaseActivity().getString(R.string.transfer_content));
-//        sendMessage(htMessage);
-//    }
+    public void sendRedMessage(EnvelopeBean singleRpbean) {
+        extJSON.put("action", 10001);   //@{@"action":@"10001",@"envId":envId,@"envName":envName,@"envMsg":envMsg}
+        extJSON.put("envId", singleRpbean.getEnvelopesID());
+        extJSON.put("envName", chatView.getBaseActivity().getString(R.string.red_content));
+        extJSON.put("envMsg", singleRpbean.getEnvelopeMessage());
+        HTMessage htMessage = HTMessage.createTextSendMessage(chatTo, chatView.getBaseActivity().getString(R.string.app_red_message));
+        sendMessage(htMessage);
+    }
+
+
+    public void sendTransferAccountsMessage(TransAccountBean singleRpbean) {
+        extJSON.put("action", 10002);   //@"action":@"10002",@"transferId":transferId,@"amountStr":amountStr,@"msg":msg
+        extJSON.put("transferId", singleRpbean.getTransferOrder());
+        extJSON.put("amountStr", singleRpbean.getTransferAmount());
+        extJSON.put("msg", singleRpbean.getTransferDesc());
+        HTMessage htMessage = HTMessage.createTextSendMessage(chatTo, chatView.getBaseActivity().getString(R.string.transfer_content));
+        sendMessage(htMessage);
+    }
 
     private void startActivity(Intent intent) {
         chatView.getFragment().startActivity(intent);

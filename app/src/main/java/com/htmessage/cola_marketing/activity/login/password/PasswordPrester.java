@@ -18,6 +18,7 @@ import com.htmessage.cola_marketing.utils.OkHttpUtils;
 import com.htmessage.cola_marketing.utils.Param;
 import com.htmessage.cola_marketing.utils.SendCodeUtils;
 import com.htmessage.sdk.client.HTClient;
+import com.jrmf360.tools.manager.CusActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,9 +157,9 @@ public class PasswordPrester implements PasswordBasePrester {
                             // show login scree
                             HTApp.getInstance().setUserJson(null);
                             HTApp.getInstance().finishActivities();
-//                            HTApp.getInstance().clearThirdToken();
+                            HTApp.getInstance().clearThirdToken();
                             LocalUserManager.getInstance().saveVersionDialog(false);
-//                            CusActivityManager.getInstance().finishAllActivity();
+                            CusActivityManager.getInstance().finishAllActivity();
                             passwordView.getBaseActivity().startActivity(new Intent(passwordView.getBaseActivity(), LoginActivity.class));
                             passwordView.getBaseActivity().finish();
                         }

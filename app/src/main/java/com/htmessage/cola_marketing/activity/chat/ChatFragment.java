@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.IMAction;
 import com.htmessage.cola_marketing.R;
@@ -40,6 +41,11 @@ import com.htmessage.cola_marketing.widget.HTAlertDialog;
 import com.htmessage.cola_marketing.widget.VoiceRecorderView;
 import com.htmessage.sdk.model.HTMessage;
 import com.htmessage.sdk.utils.MessageUtils;
+import com.jrmf360.rplib.JrmfRpClient;
+import com.jrmf360.rplib.bean.GrabRpBean;
+import com.jrmf360.rplib.bean.TransAccountBean;
+import com.jrmf360.rplib.utils.callback.GrabRpCallBack;
+import com.jrmf360.rplib.utils.callback.TransAccountCallBack;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -147,16 +153,16 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
             }
 
             @Override
-            public void onTransferMessageClicked(JSONObject jsonObject, String evnId) {
-//                JrmfRpClient.openTransDetail(getActivity(), HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), transferId, new TransAccountCallBack() {
-//                    @Override
-//                    public void transResult(TransAccountBean transAccountBean) {
-//                        String status = transAccountBean.getTransferStatus();
-//                        if ("1".equals(status)) {
-//                            presenter.sendTransferCmdMessage(jsonObject);
-//                        }
-//                    }
-//                });
+            public void onTransferMessageClicked(final JSONObject jsonObject, String transferId) {
+                JrmfRpClient.openTransDetail(getActivity(), HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), transferId, new TransAccountCallBack() {
+                    @Override
+                    public void transResult(TransAccountBean transAccountBean) {
+                        String status = transAccountBean.getTransferStatus();
+                        if ("1".equals(status)) {
+                            presenter.sendTransferCmdMessage(jsonObject);
+                        }
+                    }
+                });
             }
         });
     }
@@ -403,11 +409,13 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
 
         @Override
         public void onRedPackageItemClicked() {
+            //TODO 发红包
             presenter.sendRedPackage();
         }
 
         @Override
         public void onTransferItemClicked() {
+            //TODO 转账
             presenter.sendTransferMessage();
         }
     }
@@ -459,25 +467,29 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
      * @param envId
      */
     private void OpenRedMessage(final JSONObject jsonObject, String envId){
-//        if (chatType == MessageUtils.CHAT_GROUP) {
-//            JrmfRpClient.openGroupRp(getActivity(), HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), HTApp.getInstance().getUsername(), HTApp.getInstance().getUserAvatar(), envId, new GrabRpCallBack() {
-//                @Override
-//                public void grabRpResult(int i) {
-//                    if (i ==0 || i ==1){
-//                        presenter.sendRedCmdMessage(jsonObject);
-//                    }
-//                }
-//            });
-//        } else {
-//            JrmfRpClient.openSingleRp(getActivity(), HTApp.getInstance().getUsername(), HTApp.getInstance().getThirdToken(), HTApp.getInstance().getUsername(), HTApp.getInstance().getUserAvatar(), envId, new GrabRpCallBack() {
-//                @Override
-//                public void grabRpResult(int i) {
-//                    if (i ==0 || i ==1){
-//                        presenter.sendRedCmdMessage(jsonObject);
-//                    }
-//                }
-//            });
-//        }
+        if (chatType == MessageUtils.CHAT_GROUP) {
+            JrmfRpClient.openGroupRp(getActivity(), HTApp.getInstance().getUsername()
+                    , HTApp.getInstance().getThirdToken(), HTApp.getInstance().getUsername()
+                    , HTApp.getInstance().getUserAvatar(), envId, new GrabRpCallBack() {
+                @Override
+                public void grabRpResult(GrabRpBean grabRpBean) {
+                    if (grabRpBean.isHadGrabRp()){
+                        presenter.sendRedCmdMessage(jsonObject);
+                    }
+                }
+            });
+        } else {
+            JrmfRpClient.openSingleRp(getActivity(), HTApp.getInstance().getUsername()
+                    , HTApp.getInstance().getThirdToken(), HTApp.getInstance().getUsername()
+                    , HTApp.getInstance().getUserAvatar(), envId, new GrabRpCallBack() {
+                @Override
+                public void grabRpResult(GrabRpBean grabRpBean) {
+                    if (grabRpBean.isHadGrabRp()){
+                        presenter.sendRedCmdMessage(jsonObject);
+                    }
+                }
+            });
+        }
     }
 
 

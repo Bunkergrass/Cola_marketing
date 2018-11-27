@@ -23,7 +23,12 @@ import com.htmessage.cola_marketing.manager.LocalUserManager;
 import com.htmessage.cola_marketing.manager.NotifierManager;
 import com.htmessage.cola_marketing.manager.PreferenceManager;
 import com.htmessage.cola_marketing.manager.SettingsManager;
+import com.htmessage.cola_marketing.utils.CommonUtils;
+import com.jrmf360.tools.JrmfClient;
 import com.tencent.bugly.crashreport.CrashReport;
+
+import org.anyrtc.rtmpc_hybrid.RTMPCHybird;
+import org.jivesoftware.smack.util.MD5;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -70,20 +75,50 @@ public class HTApp extends Application {
        /**
          * 初始化RTMPC引擎
         */
-//        RTMPCHybird.Inst().Init(applicationContext);
-//        RTMPCHybird.Inst().InitEngineWithAnyrtcInfo(HTConstant.DEVELOPERID, HTConstant.APPID, HTConstant.APPKEY, HTConstant.APPTOKEN);
+        RTMPCHybird.Inst().Init(applicationContext);
+        RTMPCHybird.Inst().InitEngineWithAnyrtcInfo(HTConstant.DEVELOPERID, HTConstant.APPID, HTConstant.APPKEY, HTConstant.APPTOKEN);
 
 //        //红包
-//        JrmfClient.isDebug(false);
+        JrmfClient.isDebug(true);
 //        JrmfClient.setWxAppid(HTConstant.WX_APP_ID);
 //        //初始化项目
-//        JrmfClient.init(this);
+        JrmfClient.init(this);
 //        //设置微信的appid，如果不使用微信支付可以不调用此方法
     }
 
     /**
      * 金融魔方配置
      */
+    public String getThirdToken() {
+        if (TextUtils.isEmpty(thirdToken)) {
+            thirdToken = MD5.hex(getUsername() + HTConstant.MOFANG_SECRET);
+        }
+        return thirdToken;
+    }
+
+    public String getMD5MFSign(String timeStamp) {
+        String content = "cust_id:" + HTApp.getInstance().getUsername() + "|customkey:" + HTConstant.MOFANG_KEY + "|mobiletelno:" + HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_TEL) + "|seckey:" + HTConstant.MOFANG_SECRET1 + "|timeStamp:" + timeStamp;
+        return CommonUtils.getMD5String(content);
+    }
+
+    public String getMD5SaiKunSign(String timeStamp) {
+        String content = "cust_id:" + HTApp.getInstance().getUsername() + "|customkey:" + HTConstant.SAIKUN_BAOXIANCHAOSHI_KEY_ONLINE + "|mobiletelno:" + HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_TEL) + "|seckey:" + HTConstant.MOFANG_SECRET_BAOXIANCHAOSHI_ONLINE + "|timeStamp:" + timeStamp;
+        return CommonUtils.getMD5String(content);
+    }
+
+    public String getSignYinHangJiJinUrl(String timeStamp) {
+        return HTConstant.BASE_YINHANGJIJIN_URL + "?mobiletelno=" + HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_TEL)
+                + "&cust_id=" + HTApp.getInstance().getUsername() + "&customkey=" + HTConstant.MOFANG_KEY + "&timeStamp=" + timeStamp + "&sign=" + getMD5MFSign(timeStamp);
+    }
+
+    public String getSignBaoxianchaoshiUrl(String timeStamp) {
+        return HTConstant.BASE_BAOXIANCHAOSHI_URL + "?mobiletelno=" + HTApp.getInstance().getUserJson().getString(HTConstant.JSON_KEY_TEL)
+                + "&cust_id=" + HTApp.getInstance().getUsername() + "&customkey=" + HTConstant.SAIKUN_BAOXIANCHAOSHI_KEY_ONLINE + "&timeStamp=" + timeStamp + "&sign=" + getMD5SaiKunSign(timeStamp);
+    }
+
+    public void clearThirdToken() {
+        thirdToken = null;
+    }
 
 
     //获取需要提醒的活动数量
