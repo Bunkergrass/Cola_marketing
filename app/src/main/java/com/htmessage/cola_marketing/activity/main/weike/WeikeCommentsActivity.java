@@ -25,11 +25,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.BaseActivity;
 import com.htmessage.cola_marketing.activity.common.BigImageActivity;
 import com.htmessage.cola_marketing.activity.moments.widget.SquareImageView;
+import com.htmessage.cola_marketing.utils.CommonUtils;
 import com.htmessage.cola_marketing.utils.DensityUtil;
 import com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout;
 
@@ -104,6 +106,18 @@ public class WeikeCommentsActivity extends BaseActivity implements SwipyRefreshL
             public void getReplyList(int position, int page, String pid) {
                 presenter.getReplyList(position,page,pid);
             }
+
+            @Override
+            public void deleteComment(int position, String uid, String cid) {
+                if (uid.equals(HTApp.getInstance().getUsername()))
+                    showDeleteDialog(false,position,0,cid);
+            }
+
+            @Override
+            public void deleteReply(int position, int insidePos, String uid, String rid) {
+                if (uid.equals(HTApp.getInstance().getUsername()))
+                    showDeleteDialog(true,position,insidePos,rid);
+            }
         });
 
         tv_send_comment.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +157,23 @@ public class WeikeCommentsActivity extends BaseActivity implements SwipyRefreshL
                 tv_send_comment.setTextColor(getResources().getColor(R.color.text_color_light));
             }
         }
+    }
+
+    private void showDeleteDialog(final boolean isReply, final int pos, final int insidePos, final String id) {
+        CommonUtils.showDeleteDialog(this, new CommonUtils.AlertDialogCallback() {
+            @Override
+            public void onPositive() {
+                if (isReply)
+                    presenter.deleteReply(pos,insidePos,id);
+                else
+                    presenter.deleteComment(pos,id);
+            }
+
+            @Override
+            public void onNegative() {
+
+            }
+        });
     }
 
     private void showInputDialog(final int position, final String pid, final String tid) {
@@ -242,6 +273,12 @@ public class WeikeCommentsActivity extends BaseActivity implements SwipyRefreshL
         adapter.setHeaderView(headerView);
     }
 
+    @Override
+    public void deleteComment(int position) {
+        objects.remove(position-1);
+        adapter.notifyItemRemoved(position);
+    }
+
     private String getStringTime(long ms){
         Date date = new Date(ms);
         Long now = System.currentTimeMillis();
@@ -319,6 +356,11 @@ public class WeikeCommentsActivity extends BaseActivity implements SwipyRefreshL
 
     public void updateInside(int position, JSONArray data) {
         adapter.updateInside(position,data);
+    }
+
+    @Override
+    public void deleteReply(int position,int insidePosition) {
+        adapter.deleteInsideItem(position,insidePosition);
     }
 
 }

@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -432,7 +433,7 @@ public class CommonUtils {
         return jsonObject;
     }
 
-    interface AlertDialogCallback {
+    public interface AlertDialogCallback {
         void onPositive();
         void onNegative();
     }
@@ -492,6 +493,27 @@ public class CommonUtils {
                 callback.onNegative();
             }
         });
+    }
+
+    public static void showDeleteDialog(Context context, final AlertDialogCallback callback) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle("提示：确认删除吗？");
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callback.onPositive();
+                dialog.dismiss();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                callback.onNegative();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     /**

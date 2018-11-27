@@ -106,12 +106,6 @@ public class WeikeCommentsAdapter extends RecyclerView.Adapter <WeikeCommentsAda
         //View view = View.inflate(context, R.layout.item_weike_comments,null);
         View view = LayoutInflater.from(context).inflate(R.layout.item_weike_comments,viewGroup,false);
         ViewHolder holder = new ViewHolder(view);
-        int position = holder.getAdapterPosition();
-        holder.lv_inside.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            }
-        });
         return holder;
     }
 
@@ -187,6 +181,20 @@ public class WeikeCommentsAdapter extends RecyclerView.Adapter <WeikeCommentsAda
                 }
             }
         });
+        viewHolder.lv_inside.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                listener.deleteReply(pos,position,adapter.getUserId(position),adapter.getReplyId(position));
+                return true;
+            }
+        });
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                listener.deleteComment(pos, uid, post_comment_id);
+                return true;
+            }
+        });
     }
 
     private String getStringTime(long ms){
@@ -233,6 +241,11 @@ public class WeikeCommentsAdapter extends RecyclerView.Adapter <WeikeCommentsAda
         notifyItemChanged(position);
     }
 
+    public void deleteInsideItem(int i,int j) {
+        this.list.get(i - 1).getJSONArray("comment_reply_list").remove(j);
+        notifyItemChanged(i);
+    }
+
     public void setListener(AdpterListener listener) {
         this.listener = listener;
     }
@@ -243,6 +256,10 @@ public class WeikeCommentsAdapter extends RecyclerView.Adapter <WeikeCommentsAda
         void sendReply(int position, String pid, String tid);
 
         void getReplyList(int position, int page, String pid);
+
+        void deleteComment(int position, String uid, String cid);
+
+        void deleteReply(int position, int insidePos, String uid, String rid);
     }
 
     private void setListViewHeightBasedOnChildren(ListView listView) {
@@ -295,6 +312,10 @@ public class WeikeCommentsAdapter extends RecyclerView.Adapter <WeikeCommentsAda
         @Override
         public long getItemId(int position) {
             return position;
+        }
+
+        public String getReplyId(int position) {
+            return list.get(position).getString("post_comment_reply_id");
         }
 
         @Override

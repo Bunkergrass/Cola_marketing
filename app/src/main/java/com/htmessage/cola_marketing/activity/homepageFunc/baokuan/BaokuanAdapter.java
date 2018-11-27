@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 
 import java.util.List;
@@ -124,14 +125,15 @@ public class BaokuanAdapter extends RecyclerView.Adapter<BaokuanAdapter.ViewHold
             String image = images[position];
             ImageView imageView = new ImageView(context);
             RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.default_image).error(R.drawable.default_image);
-            Glide.with(context).load(image).apply(options).into(imageView);
+            Glide.with(context).load(HTConstant.baseGoodsUrl+image).apply(options).into(imageView);
             container.addView(imageView);
             return  imageView;
         }
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            super.destroyItem(container, position, object);
+            container = null;
+//            super.destroyItem(container, position, object);
         }
     }
 

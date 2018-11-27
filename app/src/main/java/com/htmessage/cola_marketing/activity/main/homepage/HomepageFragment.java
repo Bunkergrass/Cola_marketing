@@ -19,6 +19,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
+import com.htmessage.cola_marketing.activity.WebViewActivity;
+import com.htmessage.cola_marketing.activity.chat.file.util.MD5;
 import com.htmessage.cola_marketing.activity.chat.group.GroupListActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.AptitudeExam.ExamActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.baokuan.BaokuanActivity;
@@ -118,6 +120,7 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), BaokuanActivity.class));
                 break;
             case R.id.home_cuxiao:
+                openShop();
                 break;
             case R.id.home_danpin:
                 startActivity(new Intent(getActivity(), DanpinActivity.class));
@@ -170,6 +173,20 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
         super.onPause();
     }
 
+    private void openShop() {
+        String sign = MD5.getStringMD5("3F7FE95D1C0550BB5657709A296408964CD4A7E8" //token
+                + "0A82F47CAFC58C47BEAC1B2B840826F01845BC39" //app_secret
+                + "klyx-app" //app_id
+                + "70a37f7e86b12404b0a5566d2bedd629c1286eec"); //encryption_mode
+
+        startActivity(new Intent(getActivity(), WebViewActivity.class)
+                .putExtra("title","促销商城")
+                .putExtra("url","http://cx.kakusi.cn/index.php?s=/wap&userID="
+                        + HTApp.getInstance().getUsername()
+                        + "&usernick=" + HTApp.getInstance().getUserNick()
+                        + "&tel=" + HTApp.getInstance().getUserTel() + "&sign=" +sign));
+    }
+
     private void requestOnlyList() {
         List<Param> params = new ArrayList<>();
         params.add(new Param("uid", HTApp.getInstance().getUsername()));
@@ -181,11 +198,12 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
                 Log.d("requestOnlyList",jsonObject.toString());
                 switch (jsonObject.getInteger("code")) {
                     case 1:
+                        tv_nothing.setVisibility(View.GONE);
                         JSONArray datas = jsonObject.getJSONArray("data");
                         tiv_home0.setVisibility(View.VISIBLE);
                         tiv_home1.setVisibility(View.VISIBLE);
-                        tiv_home0.initView(datas.getJSONObject(0),getActivity());
-                        tiv_home1.initView(datas.getJSONObject(1),getActivity());
+                        tiv_home0.initView(datas.getJSONObject(0),getContext());
+                        tiv_home1.initView(datas.getJSONObject(1),getContext());
                         break;
                     default:
 

@@ -64,6 +64,9 @@ public class HTConstant {
     public static final String URL_WEIKE_COMMENT_REPLY_LIST = HOST + "comment_reply_list"; //楼中楼列表
     public static final String URL_WEIKE_POST_FABULOUS = HOST + "post_goods"; //评论点赞
     public static final String URL_WEIKE_SEND_REPLY = HOST + "send_comment_reply"; //评论回复
+    public static final String URL_WEIKE_DELETE_POST = HOST + "delete_post"; //
+    public static final String URL_WEIKE_DELETE_COMMENT = HOST + "delete_comment"; //
+    public static final String URL_WEIKE_DELETE_COMMENT_REPLY = HOST + "delete_comment_reply"; //
     //商品相关接口
     public static final String URL_TRADE_ONLY_LIST = BASE_IP + "only/only_list";
     public static final String URL_TRADE_ONLY_DETAIL = BASE_IP + "only/only_detail";
@@ -80,6 +83,9 @@ public class HTConstant {
     public static final String URL_MY_SALE_LIST = BASE_IP + "only/my_sale_list";
     public static final String URL_MY_PROJECT_LIST = BASE_IP + "only/my_explain_list";
     public static final String URL_ENCRYPT_URL = BASE_IP + "only/encrypt_url";
+    public static final String URL_DELETE_APPLY = BASE_IP + "only/del_apply";
+    public static final String URL_DELETE_ONLYGOOD = BASE_IP + "only/del_onlygood";
+    public static final String URL_DELETE_PROJECT = BASE_IP + "only/del_explain";
     //考核接口
     public static final String URL_CHECK_LIST = BASE_IP + "check/check_list";//我的考题
     public static final String URL_CHECK_RESULT = BASE_IP + "check/check_result";

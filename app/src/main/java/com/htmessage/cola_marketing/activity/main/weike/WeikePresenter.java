@@ -70,6 +70,33 @@ public class WeikePresenter implements WeikeContract.Presenter {
     }
 
     @Override
+    public void deleteWeike(final int position, String id) {
+        final Context context = view.getBaseActivity();
+        List<Param> params = new ArrayList<>();
+        params.add(new Param("uid",uid));
+        params.add(new Param("post_id",id));
+        new OkHttpUtils(context).post(params, HTConstant.URL_WEIKE_DELETE_POST, new OkHttpUtils.HttpCallBack() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                switch (jsonObject.getInteger("code")){
+                    case 1:
+                        view.deletePost(position);
+                        Toast.makeText(context, R.string.delete_sucess,Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    @Override
     public void sendComment(final String tid, String content) {
         final Context context = detailView.getBaseContext();
         List<Param> params = new ArrayList<>();
@@ -161,6 +188,32 @@ public class WeikePresenter implements WeikeContract.Presenter {
     }
 
     @Override
+    public void deleteComment(final int position, String id) {
+        final Context context = detailView.getBaseContext();
+        List<Param> params = new ArrayList<>();
+        params.add(new Param("uid",uid));
+        params.add(new Param("post_comment_id",id));
+        new OkHttpUtils(context).post(params, HTConstant.URL_WEIKE_DELETE_COMMENT, new OkHttpUtils.HttpCallBack() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                switch (jsonObject.getInteger("code")){
+                    case 1:
+                        detailView.deleteComment(position);
+                        Toast.makeText(context, R.string.delete_sucess,Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
     public void postFabulous(final int position, String tid, String pid, final int type) {
         final Context context = detailView.getBaseContext();
         List<Param> params = new ArrayList<>();
@@ -218,6 +271,32 @@ public class WeikePresenter implements WeikeContract.Presenter {
             public void onFailure(String errorMsg) {
                 Log.e("getReplyList",errorMsg);
                 Toast.makeText(context, R.string.request_failed_msg,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void deleteReply(final int position, final int insidePosition, String id) {
+        final Context context = detailView.getBaseContext();
+        List<Param> params = new ArrayList<>();
+        params.add(new Param("uid",uid));
+        params.add(new Param("post_comment_reply_id",id));
+        new OkHttpUtils(context).post(params, HTConstant.URL_WEIKE_DELETE_COMMENT_REPLY, new OkHttpUtils.HttpCallBack() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                switch (jsonObject.getInteger("code")){
+                    case 1:
+                        detailView.deleteReply(position,insidePosition);
+                        Toast.makeText(context, R.string.delete_sucess,Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(context, R.string.delete_failed,Toast.LENGTH_SHORT).show();
             }
         });
     }

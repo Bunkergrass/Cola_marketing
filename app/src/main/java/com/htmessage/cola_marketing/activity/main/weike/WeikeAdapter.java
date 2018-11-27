@@ -1,5 +1,7 @@
 package com.htmessage.cola_marketing.activity.main.weike;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.common.BigImageActivity;
@@ -56,6 +59,15 @@ public class WeikeAdapter extends RecyclerView.Adapter<WeikeAdapter.ViewHolder> 
         this.list = list;
     }
 
+    public void setListener(AdapterListener listener) {
+        this.listener = listener;
+    }
+
+    private AdapterListener listener;
+    interface AdapterListener {
+        void onLongClick(int position,String uid,String pid);
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -72,6 +84,14 @@ public class WeikeAdapter extends RecyclerView.Adapter<WeikeAdapter.ViewHolder> 
                 Intent intent = new Intent(context,WeikeCommentsActivity.class);
                 intent.putExtra("post_id",list.get(holder.getAdapterPosition()).getString("post_id"));
                 context.startActivity(intent);
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int i = holder.getAdapterPosition();
+                listener.onLongClick(i,list.get(i).getString("uid"),list.get(i).getString("post_id"));
+                return true;
             }
         });
         return  holder;
@@ -139,6 +159,11 @@ public class WeikeAdapter extends RecyclerView.Adapter<WeikeAdapter.ViewHolder> 
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void deleteItem(int i) {
+        this.list.remove(i);
+        notifyItemRemoved(i);
     }
 
 }

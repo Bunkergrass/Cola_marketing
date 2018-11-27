@@ -174,6 +174,14 @@ public class HTApp extends Application {
         return username;
     }
 
+    public String getUserTel() {
+        String username = null;
+        if (getUserJson() != null) {
+            username = getUserJson().getString(HTConstant.JSON_KEY_TEL);
+        }
+        return username;
+    }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
