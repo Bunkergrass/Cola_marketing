@@ -62,7 +62,7 @@ public class ChatAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private String chatTo;
     private int chatType;
-    private List<HTMessage> imageMsgs = new ArrayList<>();
+//    private List<HTMessage> imageMsgs = new ArrayList<>();
 
     private static final int MESSAGE_TEXT_RECEIVED = 0;
     private static final int MESSAGE_TEXT_SEND = 1;
@@ -90,11 +90,11 @@ public class ChatAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(context);
         this.chatTo = chatTo;
         this.chatType = chatType;
-        imageMsgs.clear();
+//        imageMsgs.clear();
         for (int i = 0; i < msgs.size(); i++) {
             HTMessage emMessage = msgs.get(i);
             if (emMessage.getType() == HTMessage.Type.IMAGE) {
-                imageMsgs.add(emMessage);
+//                imageMsgs.add(emMessage);
             }
         }
     }

@@ -58,8 +58,6 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
     private int chatType;
     private String toChatUsername;
     private MyBroadcastReciver myBroadcastReciver;
-    private boolean isFirst = true;
-    private int health_inform_height;
 
     private ChatAdapter adapter;
     private ChatContract.Presenter presenter;
@@ -80,13 +78,11 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Bundle fragmentArgs = getArguments();
 
+        Bundle fragmentArgs = getArguments();
         chatType = fragmentArgs.getInt("chatType", MessageUtils.CHAT_SINGLE);
         toChatUsername = fragmentArgs.getString("userId");
 
-        chatType = MessageUtils.CHAT_SINGLE;
-        toChatUsername = "userId";
         setView();
 
         IntentFilter intentFilter = new IntentFilter();
@@ -188,32 +184,6 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
             }
         }, 500);
         sl_refresh_chat.setRefreshing(false);
-    }
-
-    private void showAnimation(final View v, int start, int end, final boolean isShow) {
-        ValueAnimator animator = ValueAnimator.ofInt(start,end);
-        animator.setDuration(300);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Integer value = (Integer) animation.getAnimatedValue();
-                ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
-                layoutParams.height = value;
-                v.setLayoutParams(layoutParams);
-            }
-        });
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                if (!isShow) {v.setVisibility(View.VISIBLE);}
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (isShow){v.setVisibility(View.GONE);}
-            }
-        });
-        animator.start();
     }
 
     private void showMsgDialog(final HTMessage message, final int postion) {

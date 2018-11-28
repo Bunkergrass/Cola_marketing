@@ -64,7 +64,7 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 startActivity(new Intent(GroupListActivity.this, ChatActivity.class)
-                        .putExtra("userId",groupAdapter.getItem(position-1).getGroupId())
+                        .putExtra("userId",groupAdapter.getItem(position).getGroupId())
                         .putExtra("chatType", MessageUtils.CHAT_GROUP));
 //                    finish();
             }

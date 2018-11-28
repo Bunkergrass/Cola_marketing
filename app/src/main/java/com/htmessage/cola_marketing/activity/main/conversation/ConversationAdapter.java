@@ -104,7 +104,7 @@ public class ConversationAdapter extends BaseAdapter {
             holder.tv_group_tag.setVisibility(View.INVISIBLE);
             if (user != null) {
                 holder.tv_name.setText(user.getNick());
-                RequestOptions options2 = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.default_group);
+                RequestOptions options2 = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.default_avatar);
                 Glide.with(context).load(user.getAvatar()).apply(options2).into(holder.ivAvatar);
             } else {
                 holder.tv_name.setText(userId);

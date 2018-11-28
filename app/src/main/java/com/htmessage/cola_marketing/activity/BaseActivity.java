@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void setTitle(String title) {
+    public void setTitle(CharSequence title) {
         TextView textView = this.findViewById(R.id.tv_title);
         if (textView != null) {
             textView.setText(title);
@@ -145,7 +145,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void showRightTextView(String res, View.OnClickListener onClickListener) {
+    public void showRightTextView(CharSequence res, View.OnClickListener onClickListener) {
         TextView tv_right = this.findViewById(R.id.tv_right);
         if (tv_right != null) {
             tv_right.setText(res);

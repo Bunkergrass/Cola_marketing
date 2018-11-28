@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -129,10 +130,10 @@ public class ChatSettingGroupActivity extends BaseActivity {
         }
         tv_groupname.setText(htGroup.getGroupName());
         tv_groupDesc.setText(htGroup.getGroupDesc());
-        //JSONArray jsonArrayCache = ACache.get(getApplicationContext()).getAsJSONArray(userId + groupId);
-        JSONArray jsonArrayCache = ACache.get(ChatSettingGroupActivity.this).getAsJSONArray(userId + groupId);
+        JSONArray jsonArrayCache = ACache.get(getApplicationContext()).getAsJSONArray(userId + groupId);
+//        JSONArray jsonArrayCache = ACache.get(ChatSettingGroupActivity.this).getAsJSONArray(userId + groupId);
         arrayToList(jsonArrayCache, membersJSONArray);
-        setTitle(R.string.chat_msg + "(" + String.valueOf(membersJSONArray.size()) + ")");
+        setTitle(getString(R.string.chat_msg) + "(" + String.valueOf(membersJSONArray.size()) + ")");
         adapter = new GroupSetingsGridApdater(this, membersJSONArray, htGroup.getOwner().equals(userId));
         userGridview.setAdapter(adapter);
         // 设置OnTouchListener
@@ -178,7 +179,7 @@ public class ChatSettingGroupActivity extends BaseActivity {
             }
         });
         refreshGroupMembersInserver();
-        setTitle(R.string.chat_msg + "(" + String.valueOf(membersJSONArray.size()) + ")");
+
         re_clear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,6 +294,7 @@ public class ChatSettingGroupActivity extends BaseActivity {
         new OkHttpUtils(this).post(params, HTConstant.URL_GROUP_MEMBERS, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+                Log.d("getGroupMembers",jsonObject.toString());
                 if (jsonObject.containsKey("code")) {
                     int code = Integer.parseInt(jsonObject.getString("code"));
                     if (code == 1000) {
