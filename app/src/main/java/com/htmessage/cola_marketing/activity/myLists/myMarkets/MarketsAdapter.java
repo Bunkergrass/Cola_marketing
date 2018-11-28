@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.homepageFunc.xiaoshou.XiaoShouActivity;
+import com.htmessage.cola_marketing.activity.myLists.ListAdapterListener;
 
 import java.util.List;
 
@@ -46,11 +47,23 @@ public class MarketsAdapter extends RecyclerView.Adapter<MarketsAdapter.ViewHold
         }
     }
 
+    private ListAdapterListener listener;
+    public void setListener(ListAdapterListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_my_market,viewGroup,false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                listener.onLongClick(holder.getAdapterPosition(),v);
+                return true;
+            }
+        });
         return holder;
     }
 

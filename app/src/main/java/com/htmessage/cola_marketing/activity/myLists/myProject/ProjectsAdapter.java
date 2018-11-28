@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.htmessage.cola_marketing.R;
+import com.htmessage.cola_marketing.activity.myLists.ListAdapterListener;
 
 import java.util.List;
 
@@ -22,9 +23,14 @@ public class ProjectsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private View footerView;
     private static final int TYPE_FOOTER = -1;
 
-    public ProjectsAdapter(Context context, List<JSONObject> list) {
+    ProjectsAdapter(Context context, List<JSONObject> list) {
         this.list = list;
         this.context = context;
+    }
+
+    private ListAdapterListener listener;
+    public void setListener(ListAdapterListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -45,9 +51,8 @@ public class ProjectsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                context.startActivity(new Intent(context,AddProjectActivity.class)
-                        .putExtra("project",list.get(holder.getAdapterPosition()).toString()));
-                return false;
+                listener.onLongClick(holder.getAdapterPosition(),v);
+                return true;
             }
         });
         return holder;
