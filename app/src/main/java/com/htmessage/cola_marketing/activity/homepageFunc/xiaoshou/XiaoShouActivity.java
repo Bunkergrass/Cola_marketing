@@ -2,7 +2,14 @@ package com.htmessage.cola_marketing.activity.homepageFunc.xiaoshou;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -18,7 +25,15 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
@@ -40,6 +55,8 @@ public class XiaoShouActivity extends BaseActivity {
 
     private String onlyId,onlyGoodId;
     private boolean state,isAdd;
+    private final Bitmap[] mainPic = new Bitmap[1];
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +101,7 @@ public class XiaoShouActivity extends BaseActivity {
         final String market_price = jsonObject.getString("market_price");
         final String name = jsonObject.getString("only_good_name");
         final String stock = jsonObject.getString("stock");
-        String imgUrl = jsonObject.getString("only_good_pic");
+        final String imgUrl = jsonObject.getString("only_good_pic");
         String description = jsonObject.getString("description");
         final String shareUrl = HTConstant.baseGoodsUrl + jsonObject.getString("only_url");
 
@@ -96,10 +113,22 @@ public class XiaoShouActivity extends BaseActivity {
         string.setSpan(sizeSpan,0,1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_price.setText(string);
 
-        RequestOptions options = new RequestOptions().placeholder(R.drawable.default_image2).error(R.drawable.default_image2);
-        Glide.with(this).load(HTConstant.baseGoodsUrl+imgUrl).apply(options).into(iv_xiaoshou);
-
         wb_detail.loadDataWithBaseURL(HTConstant.baseGoodsUrl,description,"text/html", "utf-8",null);
+
+        RequestOptions options = new RequestOptions().placeholder(R.drawable.default_image2).error(R.drawable.default_image2);
+        Glide.with(this).load(HTConstant.baseGoodsUrl+imgUrl).apply(options).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                BitmapDrawable bd = (BitmapDrawable) resource;
+                mainPic[0] = bd.getBitmap();
+                return false;
+            }
+        }).into(iv_xiaoshou);
 
         if (state) {
             final Intent intent = new Intent(XiaoShouActivity.this,OnlyEditActivity.class)
@@ -119,7 +148,17 @@ public class XiaoShouActivity extends BaseActivity {
         ll_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ShareUtils.shareText(XiaoShouActivity.this,shareUrl,"分享商品");
+//                if (mainPic[0] != null && uri == null) {
+//                    uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mainPic[0], name,null));
+//                    Toast.makeText(XiaoShouActivity.this,"图片已保存",Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                    intent.setData(uri);
+//                    sendBroadcast(intent);//通知相册更新
+//                }
+                if (mainPic[0] != null) {
+                    Toast.makeText(XiaoShouActivity.this,"图片已保存",Toast.LENGTH_SHORT).show();
+                    ShareUtils.saveImageToGallery(getApplicationContext(),mainPic[0]);
+                }
                 requestEncryptUrl();
             }
         });
@@ -173,8 +212,13 @@ public class XiaoShouActivity extends BaseActivity {
                 Log.d("requestEncryptUrl",jsonObject.toString());
                 switch (jsonObject.getInteger("code")) {
                     case 1:
+//                        if (uri != null) {
+//                            ShareUtils.shareImageAndText(XiaoShouActivity.this,uri
+//                                    ,HTConstant.baseGoodsUrl.substring(0,HTConstant.baseGoodsUrl.length()-1) + jsonObject.getString("data")
+//                                    ,"分享商品动态链接");
+//                        } else
                         ShareUtils.shareText(XiaoShouActivity.this
-                                ,HTConstant.baseGoodsUrl+jsonObject.getString("data")
+                                ,HTConstant.baseGoodsUrl.substring(0,HTConstant.baseGoodsUrl.length()-1) + jsonObject.getString("data")
                                 ,"分享商品动态链接");
                         break;
                     default:
