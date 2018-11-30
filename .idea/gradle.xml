@@ -9,6 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/jrmfbaselib" />
+            <option value="$PROJECT_DIR$/jrmfewalletlib" />
+            <option value="$PROJECT_DIR$/jrmfrplib" />
+            <option value="$PROJECT_DIR$/jrmfwalletlib" />
+            <option value="$PROJECT_DIR$/jrmfwalletpaylib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

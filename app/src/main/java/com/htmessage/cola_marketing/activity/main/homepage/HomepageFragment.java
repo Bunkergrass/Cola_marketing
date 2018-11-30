@@ -120,15 +120,16 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), BaokuanActivity.class));
                 break;
             case R.id.home_cuxiao:
-                openShop();
+                openShop("http://cx.kakusi.cn/index.php?s=/wap","促销商城");
                 break;
             case R.id.home_danpin:
                 startActivity(new Intent(getActivity(), DanpinActivity.class));
                 break;
             case R.id.home_daoshi:
+                startActivity(new Intent(getActivity(), TiyanActivity.class));
                 break;
             case R.id.home_tiyan:
-                startActivity(new Intent(getActivity(), TiyanActivity.class));
+                openShop("http://klshop.kakusi.cn/index.php?s=/wap","体验商城");
                 break;
             case R.id.home_tutor:
                 break;
@@ -173,15 +174,15 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
         super.onPause();
     }
 
-    private void openShop() {
+    private void openShop(String baseIP,String title) {
         String sign = MD5.getStringMD5("3F7FE95D1C0550BB5657709A296408964CD4A7E8" //token
                 + "0A82F47CAFC58C47BEAC1B2B840826F01845BC39" //app_secret
                 + "klyx-app" //app_id
                 + "70a37f7e86b12404b0a5566d2bedd629c1286eec"); //encryption_mode
 
         startActivity(new Intent(getActivity(), WebViewActivity.class)
-                .putExtra("title","促销商城")
-                .putExtra("url","http://cx.kakusi.cn/index.php?s=/wap&userID="
+                .putExtra("title",title)
+                .putExtra("url",baseIP+"&userID="
                         + HTApp.getInstance().getUsername()
                         + "&usernick=" + HTApp.getInstance().getUserNick()
                         + "&tel=" + HTApp.getInstance().getUserTel() + "&sign=" +sign));

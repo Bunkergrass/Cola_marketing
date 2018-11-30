@@ -82,7 +82,7 @@ public class MainPrestener implements MainBasePrester {
                     if (!version.equals(serviceVersion) && (Integer.valueOf(version) < Integer.valueOf(serviceVersion))) {
                         boolean check = LocalUserManager.getInstance().getVersionCheck();
                         if (!check) {
-                            mainView.showUpdateDialog(info, url, statue);
+                            mainView.showUpdateDialog(info, url, statue.equals("1"));
                         }
                     }
                 }

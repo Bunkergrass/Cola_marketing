@@ -7,5 +7,5 @@ public interface MainView extends BaseView<MainPrestener> {
 
     void showConflicDialog();
 
-    void showUpdateDialog(String message, String url, String isForce);
+    void showUpdateDialog(String message, String url, boolean isForce);
 }

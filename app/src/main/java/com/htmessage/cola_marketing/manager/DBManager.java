@@ -229,7 +229,8 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<InviteMessage> msgs = new ArrayList<InviteMessage>();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + InviteMessgeDao.TABLE_NAME + " desc", null);
+//            Cursor cursor = db.rawQuery("select * from " + InviteMessgeDao.TABLE_NAME + " desc", null);
+            Cursor cursor = db.rawQuery("select * from " + InviteMessgeDao.TABLE_NAME , null);
             while (cursor.moveToNext()) {
                 InviteMessage msg = new InviteMessage();
                 int id = cursor.getInt(cursor.getColumnIndex(InviteMessgeDao.COLUMN_NAME_ID));
@@ -352,7 +353,8 @@ public class DBManager {
         List<MomentsMessage> momentsMessages = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME + " desc", null);
+//            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME + " desc", null);
+            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME , null);
             while (cursor.moveToNext()) {
                 MomentsMessage momentsMessage = new MomentsMessage();
                 int id = cursor.getInt(cursor.getColumnIndex(MomentsMessageDao.COLUMN_NAME_ID));
@@ -460,7 +462,8 @@ public class DBManager {
         int count = 0;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME + " desc where "+MomentsMessageDao.COLUMN_NAME_STATUS+" = ?", new String[]{MomentsMessage.Status.UNREAD.ordinal()+""});
+//            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME + " desc where "+MomentsMessageDao.COLUMN_NAME_STATUS+" = ?", new String[]{MomentsMessage.Status.UNREAD.ordinal()+""});
+            Cursor cursor = db.rawQuery("select * from " + MomentsMessageDao.TABLE_NAME + " where "+MomentsMessageDao.COLUMN_NAME_STATUS+" = ?", new String[]{MomentsMessage.Status.UNREAD.ordinal()+""});
             while (cursor.moveToNext()) {
                 count++;
             }
