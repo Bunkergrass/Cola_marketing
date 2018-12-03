@@ -118,9 +118,20 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
 //        myLocationStyle.strokeColor(android.R.color.transparent);
             aMap.setMyLocationStyle(myLocationStyle);
             //地图点击，设置marker
-            aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
+//            aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
+//                @Override
+//                public void onMapClick(LatLng latLng) {
+//                    if (marker != null){marker.setPosition(latLng);}
+//                    else{
+//                        MarkerOptions options = getMarkerOptions(latLng, "实际位置");
+//                        marker = aMap.addMarker(options);
+//                    }
+//                    aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
+//                }
+//            });
+            aMap.setOnMapLongClickListener(new AMap.OnMapLongClickListener() {
                 @Override
-                public void onMapClick(LatLng latLng) {
+                public void onMapLongClick(LatLng latLng) {
                     if (marker != null){marker.setPosition(latLng);}
                     else{
                         MarkerOptions options = getMarkerOptions(latLng, "实际位置");

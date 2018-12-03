@@ -30,6 +30,8 @@
     <!-- SDK2.1新增获取用户位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 写入扩展存储，向扩展卡写入数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- <uses-permission -->
     <!-- android:name="android.permission.WRITE_APN_SETTINGS" -->
     <!-- tools:ignore="ProtectedPermissions" /> -->
@@ -93,6 +95,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <!-- service -->
+
+        <!-- 高德的SDK -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="d9a93a6c90d951d2ce4392ad66dfbaee"/>
+        <!-- 高德所用的定位service -->
+        <service android:name="com.amap.api.location.APSService" />
 
         <!-- 金融魔方配置 -->
         <meta-data
