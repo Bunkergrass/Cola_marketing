@@ -13,13 +13,12 @@
         android:id="@+id/srl_baokuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:direction="both"
-        android:descendantFocusability="afterDescendants">
+        app:direction="both">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_baokuan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout>
 

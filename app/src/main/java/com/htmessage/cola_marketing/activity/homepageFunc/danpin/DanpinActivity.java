@@ -30,6 +30,7 @@ public class DanpinActivity extends BaseActivity implements SwipyRefreshLayout.O
     private SwipyRefreshLayout srl_danpin;
 
     private DanpinAdapter adapter;
+    private List<JSONObject> list = new ArrayList<>();
     private int page = 1;
 
     private static final String REQUEST_TYPE = "0";//0：单品市场
@@ -56,7 +57,7 @@ public class DanpinActivity extends BaseActivity implements SwipyRefreshLayout.O
         srl_danpin.setOnRefreshListener(this);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        adapter = new DanpinAdapter(this,new ArrayList<JSONObject>());
+        adapter = new DanpinAdapter(this, list);
         rv_danpin.setLayoutManager(manager);
         rv_danpin.setAdapter(adapter);
     }
@@ -74,12 +75,13 @@ public class DanpinActivity extends BaseActivity implements SwipyRefreshLayout.O
                 switch (jsonObject.getInteger("code")) {
                     case 1:
                         JSONArray data = jsonObject.getJSONArray("data");
-                        List<JSONObject> list = JSONArray.parseArray(data.toJSONString(),JSONObject.class);
                         if (page == 1) {
-                            adapter.refreshList(list);
+                            list.clear();
+                            list.addAll(JSONArray.parseArray(data.toJSONString(),JSONObject.class));
                         } else {
-                            adapter.addList(list);
+                            list.addAll(JSONArray.parseArray(data.toJSONString(),JSONObject.class));
                         }
+                        adapter.notifyDataSetChanged();
                         break;
                     default:
                         Toast.makeText(DanpinActivity.this,R.string.just_nothing,Toast.LENGTH_SHORT).show();
@@ -141,17 +143,5 @@ public class DanpinActivity extends BaseActivity implements SwipyRefreshLayout.O
         public int getItemCount() {
             return list.size();
         }
-
-        public void addList(List<JSONObject> list) {
-            this.list.addAll(list);
-            notifyDataSetChanged();
-        }
-
-        public void refreshList(List<JSONObject> list) {
-            this.list.clear();
-            this.list.addAll(list);
-            notifyDataSetChanged();
-        }
-
     }
 }

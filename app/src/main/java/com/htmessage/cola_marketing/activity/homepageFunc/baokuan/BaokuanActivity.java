@@ -1,6 +1,7 @@
 package com.htmessage.cola_marketing.activity.homepageFunc.baokuan;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +24,10 @@ import java.util.List;
 public class BaokuanActivity extends BaseActivity implements SwipyRefreshLayout.OnRefreshListener {
     private RecyclerView rv_baokuan;
     private SwipyRefreshLayout srl_baokuan;
+    SwipeRefreshLayout s;
+
     private BaokuanAdapter adapter;
+    private List<JSONObject> list = new ArrayList<>();
 
     private int page = 1;
     private static final String REQUEST_TYPE = "1";//1：爆款打造
@@ -50,7 +54,7 @@ public class BaokuanActivity extends BaseActivity implements SwipyRefreshLayout.
         srl_baokuan.setOnRefreshListener(this);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        adapter = new BaokuanAdapter(this,new ArrayList<JSONObject>());
+        adapter = new BaokuanAdapter(this,list);
         rv_baokuan.setLayoutManager(manager);
         rv_baokuan.setAdapter(adapter);
     }
@@ -68,12 +72,13 @@ public class BaokuanActivity extends BaseActivity implements SwipyRefreshLayout.
                 switch (jsonObject.getInteger("code")) {
                     case 1:
                         JSONArray data = jsonObject.getJSONArray("data");
-                        List<JSONObject> list = JSONArray.parseArray(data.toJSONString(),JSONObject.class);
                         if (page == 1) {
-                            adapter.refreshList(list);
+                            list.clear();
+                            list.addAll(JSONArray.parseArray(data.toJSONString(),JSONObject.class));
                         } else {
-                            adapter.addList(list);
+                            list.addAll(JSONArray.parseArray(data.toJSONString(),JSONObject.class));
                         }
+                        adapter.notifyDataSetChanged();
                         break;
                     default:
                         Toast.makeText(BaokuanActivity.this,R.string.just_nothing,Toast.LENGTH_SHORT).show();

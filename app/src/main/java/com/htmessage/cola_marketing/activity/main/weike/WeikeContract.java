@@ -30,11 +30,13 @@ public interface WeikeContract {
 
         void refreshList(List<JSONObject> list);
 
+        void sendCommentSuccess();
+
         void updateList(List<JSONObject> list);
 
         void updateFabulous(int position, int count, int type);
 
-        void sendSuccess(int position,JSONObject data);
+        void sendReplySuccess(int position, JSONObject data);
 
         void updateInside(int position, JSONArray data);
 

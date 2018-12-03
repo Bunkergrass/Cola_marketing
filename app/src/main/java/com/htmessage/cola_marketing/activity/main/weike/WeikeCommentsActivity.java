@@ -2,6 +2,7 @@ package com.htmessage.cola_marketing.activity.main.weike;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -343,14 +345,20 @@ public class WeikeCommentsActivity extends BaseActivity implements SwipyRefreshL
         adapter.addComment(list);
     }
 
-    public void updateFabulous(int position, int count,int type) {
+    @Override
+    public void sendCommentSuccess() {
+        et_weike_commment.setText("");
+        et_weike_commment.clearFocus();
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(et_weike_commment.getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    public void updateFabulous(int position, int count, int type) {
         adapter.updateFabulous(position,count,type);
     }
 
     @Override
-    public void sendSuccess(int pos,JSONObject data) {
-        et_weike_commment.setText("");
-        et_weike_commment.clearFocus();
+    public void sendReplySuccess(int pos, JSONObject data) {
         adapter.refreshOne(pos,data);
     }
 

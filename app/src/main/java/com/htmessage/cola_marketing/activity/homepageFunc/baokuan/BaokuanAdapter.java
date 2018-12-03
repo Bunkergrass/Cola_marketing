@@ -27,11 +27,10 @@ public class BaokuanAdapter extends RecyclerView.Adapter<BaokuanAdapter.ViewHold
     private BaokuanListener listener;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ViewPager viewPager;
+        ChildViewPaper viewPager;
         LinearLayout ll_baokuan;
         TextView tv_trade;
         TextView tv_desc;
-        PhotoAdapter adapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,17 +80,6 @@ public class BaokuanAdapter extends RecyclerView.Adapter<BaokuanAdapter.ViewHold
 
     public void setListener(BaokuanListener listener) {
         this.listener = listener;
-    }
-
-    public void addList(List<JSONObject> list) {
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void refreshList(List<JSONObject> list) {
-        this.list.clear();
-        this.list.addAll(list);
-        notifyDataSetChanged();
     }
 
     public interface BaokuanListener {

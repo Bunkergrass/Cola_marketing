@@ -38,7 +38,6 @@ public class NewFriendPrestener implements NewFriendBasePresenter {
         friendRecivier = new NewFriendRecivier();
         IntentFilter intent = new IntentFilter(IMAction.ACTION_INVITE_MESSAGE);
         LocalBroadcastManager.getInstance(newFriendView.getBaseContext()).registerReceiver(friendRecivier, intent);
-
     }
 
     @Override
@@ -72,13 +71,10 @@ public class NewFriendPrestener implements NewFriendBasePresenter {
         newFriendView = null;
     }
 
-
     @Override
-    public void start() {
+    public void start() {}
 
-    }
     private class NewFriendRecivier extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             if (IMAction.ACTION_INVITE_MESSAGE.equals(intent.getAction())) {

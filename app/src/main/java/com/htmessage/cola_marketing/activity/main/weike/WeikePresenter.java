@@ -109,6 +109,7 @@ public class WeikePresenter implements WeikeContract.Presenter {
                 switch (jsonObject.getInteger("code")){
                     case 1:
                         getCommentList(1,tid,true);
+                        detailView.sendCommentSuccess();
                         Toast.makeText(context, R.string.sending_success,Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -316,7 +317,7 @@ public class WeikePresenter implements WeikeContract.Presenter {
                 switch (jsonObject.getInteger("code")){
                     case 1:
                         JSONObject data = jsonObject.getJSONObject("data");
-                        detailView.sendSuccess(position,data);
+                        detailView.sendReplySuccess(position,data);
                         break;
                     default:
                         Toast.makeText(context, R.string.just_nothing,Toast.LENGTH_SHORT).show();
