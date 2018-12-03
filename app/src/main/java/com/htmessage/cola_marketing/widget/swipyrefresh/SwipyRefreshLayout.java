@@ -18,11 +18,10 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
-import android.widget.AbsListView;
 
 import com.htmessage.cola_marketing.R;
 
-/**
+/* *
  * The SwipeRefreshLayout should be used whenever the user can refresh the
  * contents of a view via a vertical swipe gesture. The activity that
  * instantiates this view should add an OnRefreshListener to be notified
@@ -107,6 +106,7 @@ public class SwipyRefreshLayout extends ViewGroup {
     private boolean mOriginalOffsetCalculated = false;
 
     private float mInitialMotionY;
+    private float mInitialMotionX;
     private boolean mIsBeingDragged;
     private int mActivePointerId = INVALID_POINTER;
     // Whether this item is scaled up rather than clipped
@@ -199,7 +199,7 @@ public class SwipyRefreshLayout extends ViewGroup {
         mProgress.setAlpha(targetAlpha);
     }
 
-    /**
+    /* *
      * The refresh indicator starting and resting position is always positioned
      * near the top of the refreshing content. This position is a consistent
      * type_location, but can be adjusted in either direction based on whether or not
@@ -223,7 +223,7 @@ public class SwipyRefreshLayout extends ViewGroup {
         mCircleView.invalidate();
     }*/
 
-    /**
+    /* *
      * The refresh indicator resting position is always positioned near the top
      * of the refreshing content. This position is a consistent type_location, but
      * can be adjusted in either direction based on whether or not there is a
@@ -311,7 +311,8 @@ public class SwipyRefreshLayout extends ViewGroup {
         mCircleHeight = (int) (CIRCLE_DIAMETER * metrics.density);
 
         createProgressView();
-        ViewCompat.setChildrenDrawingOrderEnabled(this, true);
+//        ViewCompat.setChildrenDrawingOrderEnabled(this, true);
+        this.setChildrenDrawingOrderEnabled(true);
         // the absolute offset has to take into account that the circle starts at an offset
         mSpinnerFinalOffset = DEFAULT_CIRCLE_TARGET * metrics.density;
         mTotalDragDistance = mSpinnerFinalOffset;
@@ -389,12 +390,10 @@ public class SwipyRefreshLayout extends ViewGroup {
 
     private void startScaleUpAnimation(AnimationListener listener) {
         mCircleView.setVisibility(View.VISIBLE);
-        if (Build.VERSION.SDK_INT >= 11) {
-            // Pre API 11, alpha is used in place of scale up to show the
-            // progress circle appearing.
-            // Don't adjust the alpha during appearance otherwise.
-            mProgress.setAlpha(MAX_ALPHA);
-        }
+        // Pre API 11, alpha is used in place of scale up to show the
+        // progress circle appearing.
+        // Don't adjust the alpha during appearance otherwise.
+        mProgress.setAlpha(MAX_ALPHA);
         mScaleAnimation = new Animation() {
             @Override
             public void applyTransformation(float interpolatedTime, Transformation t) {
@@ -624,19 +623,10 @@ public class SwipyRefreshLayout extends ViewGroup {
      * scroll up. Override this if the child view is a custom view.
      */
     public boolean canChildScrollUp() {
-        if (Build.VERSION.SDK_INT < 14) {
-            if (mTarget instanceof AbsListView) {
-                final AbsListView absListView = (AbsListView) mTarget;
-                return absListView.getChildCount() > 0
-                        && (absListView.getFirstVisiblePosition() > 0 || absListView.getChildAt(0)
-                        .getTop() < absListView.getPaddingTop());
-            } else {
-                return mTarget.getScrollY() > 0;
-            }
-        } else {
-            return ViewCompat.canScrollVertically(mTarget, -1);
-        }
+        return mTarget.canScrollVertically(-1);
+//        return ViewCompat.canScrollVertically(mTarget, -1);
     }
+
 //    public boolean canChildScrollUp() {
 //        if (android.os.Build.VERSION.SDK_INT < 14) {
 //            if (mTarget instanceof AbsListView) {
@@ -659,33 +649,15 @@ public class SwipyRefreshLayout extends ViewGroup {
 
 
     public boolean canChildScrollDown() {
-        if (Build.VERSION.SDK_INT < 14) {
-            if (mTarget instanceof AbsListView) {
-                final AbsListView absListView = (AbsListView) mTarget;
-                try {
-                    if (absListView.getCount() > 0) {
-                        if (absListView.getLastVisiblePosition() + 1 == absListView.getCount()) {
-                            int lastIndex = absListView.getLastVisiblePosition() - absListView.getFirstVisiblePosition();
-                            return absListView.getChildAt(lastIndex).getBottom() == absListView.getPaddingBottom();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return true;
-            } else {
-                return true;
-            }
-        } else {
-            return ViewCompat.canScrollVertically(mTarget, 1);
-        }
+        return mTarget.canScrollVertically(1);
+//        return ViewCompat.canScrollVertically(mTarget, 1);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         ensureTarget();
 
-        final int action = MotionEventCompat.getActionMasked(ev);
+        final int action = ev.getActionMasked();;
 
         if (mReturningToStart && action == MotionEvent.ACTION_DOWN) {
             mReturningToStart = false;
@@ -710,13 +682,15 @@ public class SwipyRefreshLayout extends ViewGroup {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 setTargetOffsetTopAndBottom(mOriginalOffsetTop - mCircleView.getTop(), true);
-                mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+                mActivePointerId = ev.getPointerId(0);
                 mIsBeingDragged = false;
                 final float initialMotionY = getMotionEventY(ev, mActivePointerId);
+                final float initialMotionX = getMotionEventX(ev, mActivePointerId);
                 if (initialMotionY == -1) {
                     return false;
                 }
                 mInitialMotionY = initialMotionY;
+                mInitialMotionX = initialMotionX;
 
             case MotionEvent.ACTION_MOVE:
                 if (mActivePointerId == INVALID_POINTER) {
@@ -724,8 +698,12 @@ public class SwipyRefreshLayout extends ViewGroup {
                 }
 
                 final float y = getMotionEventY(ev, mActivePointerId);
+                final float x = getMotionEventX(ev, mActivePointerId);
                 if (y == -1) {
                     return false;
+                }
+                if (Math.abs(x - mInitialMotionX) > Math.abs(y - mInitialMotionY)) {
+                    return false;//不拦截左右滑动
                 }
                 if (mBothDirection) {
                     if (y > mInitialMotionY) {
@@ -769,11 +747,19 @@ public class SwipyRefreshLayout extends ViewGroup {
     }
 
     private float getMotionEventY(MotionEvent ev, int activePointerId) {
-        final int index = MotionEventCompat.findPointerIndex(ev, activePointerId);
+        final int index = ev.findPointerIndex(activePointerId);
         if (index < 0) {
             return -1;
         }
-        return MotionEventCompat.getY(ev, index);
+        return ev.getY(index);
+    }
+
+    private float getMotionEventX(MotionEvent ev, int activePointerId) {
+        final int index = ev.findPointerIndex(activePointerId);
+        if (index < 0) {
+            return -1;
+        }
+        return ev.getX(index);
     }
 
     @Override
@@ -811,17 +797,17 @@ public class SwipyRefreshLayout extends ViewGroup {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+                mActivePointerId = ev.getPointerId(0);
                 mIsBeingDragged = false;
                 break;
 
             case MotionEvent.ACTION_MOVE: {
-                final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
+                final int pointerIndex = ev.findPointerIndex(mActivePointerId);
                 if (pointerIndex < 0) {
                     return false;
                 }
 
-                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                final float y = ev.getY(pointerIndex);
 
                 float overscrollTop;
                 switch (mDirection) {
@@ -862,8 +848,10 @@ public class SwipyRefreshLayout extends ViewGroup {
                         mCircleView.setVisibility(View.VISIBLE);
                     }
                     if (!mScale) {
-                        ViewCompat.setScaleX(mCircleView, 1f);
-                        ViewCompat.setScaleY(mCircleView, 1f);
+//                        ViewCompat.setScaleX(mCircleView, 1f);
+                        mCircleView.setScaleX(1f);
+//                        ViewCompat.setScaleY(mCircleView, 1f);
+                        mCircleView.setScaleY(1f);
                     }
                     if (overscrollTop < mTotalDragDistance) {
                         if (mScale) {
@@ -874,7 +862,7 @@ public class SwipyRefreshLayout extends ViewGroup {
                             // Animate the alpha
                             startProgressAlphaStartAnimation();
                         }
-                        float strokeStart = (float) (adjustedPercent * .8f);
+                        float strokeStart = (adjustedPercent * .8f);
                         mProgress.setStartEndTrim(0f, Math.min(MAX_PROGRESS_ANGLE, strokeStart));
                         mProgress.setArrowScale(Math.min(1f, adjustedPercent));
                     } else {
@@ -892,8 +880,8 @@ public class SwipyRefreshLayout extends ViewGroup {
                 break;
             }
             case MotionEventCompat.ACTION_POINTER_DOWN: {
-                final int index = MotionEventCompat.getActionIndex(ev);
-                mActivePointerId = MotionEventCompat.getPointerId(ev, index);
+                final int index = ev.getActionIndex();
+                mActivePointerId = ev.getPointerId(index);
                 break;
             }
 
@@ -904,12 +892,12 @@ public class SwipyRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL: {
                 if (mActivePointerId == INVALID_POINTER) {
-                    if (action == MotionEvent.ACTION_UP) {
-                    }
+//                    if (action == MotionEvent.ACTION_UP) {
+//                    }
                     return false;
                 }
-                final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
-                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                final int pointerIndex = ev.findPointerIndex(mActivePointerId);
+                final float y = ev.getY(pointerIndex);
 
                 float overscrollTop;
                 switch (mDirection) {
@@ -994,8 +982,8 @@ public class SwipyRefreshLayout extends ViewGroup {
     private final Animation mAnimateToCorrectPosition = new Animation() {
         @Override
         public void applyTransformation(float interpolatedTime, Transformation t) {
-            int targetTop = 0;
-            int endTarget = 0;
+            int targetTop;
+            int endTarget;
             if (!mUsingCustomStart) {
                 switch (mDirection) {
                     case BOTTOM:
@@ -1016,7 +1004,7 @@ public class SwipyRefreshLayout extends ViewGroup {
     };
 
     private void moveToStart(float interpolatedTime) {
-        int targetTop = 0;
+        int targetTop;
         targetTop = (mFrom + (int) ((mOriginalOffsetTop - mFrom) * interpolatedTime));
         int offset = targetTop - mCircleView.getTop();
         setTargetOffsetTopAndBottom(offset, false /* requires update */);
@@ -1029,13 +1017,12 @@ public class SwipyRefreshLayout extends ViewGroup {
         }
     };
 
-    @SuppressLint("NewApi") private void startScaleDownReturnToStartAnimation(int from,
-                                                                              AnimationListener listener) {
+    @SuppressLint("NewApi") private void startScaleDownReturnToStartAnimation(int from, AnimationListener listener) {
         mFrom = from;
         if (isAlphaUsedForScale()) {
             mStartingScale = mProgress.getAlpha();
         } else {
-            mStartingScale = ViewCompat.getScaleX(mCircleView);
+            mStartingScale = mCircleView.getScaleX();
         }
         mScaleDownToStartAnimation = new Animation() {
             @Override
@@ -1057,19 +1044,16 @@ public class SwipyRefreshLayout extends ViewGroup {
         mCircleView.bringToFront();
         mCircleView.offsetTopAndBottom(offset);
         mCurrentTargetOffsetTop = mCircleView.getTop();
-        if (requiresUpdate && Build.VERSION.SDK_INT < 11) {
-            invalidate();
-        }
     }
 
     private void onSecondaryPointerUp(MotionEvent ev) {
-        final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-        final int pointerId = MotionEventCompat.getPointerId(ev, pointerIndex);
+        final int pointerIndex = ev.getActionIndex();
+        final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
             // This was our active pointer going up. Choose a new
             // active pointer and adjust accordingly.
             final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-            mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
+            mActivePointerId = ev.getPointerId(newPointerIndex);
         }
     }
 
@@ -1078,8 +1062,8 @@ public class SwipyRefreshLayout extends ViewGroup {
      * triggers a refresh should implement this interface.
      */
     public interface OnRefreshListener {
-        public void onRefresh(int index);
-        public void onLoad(int index);
+        void onRefresh(int index);
+        void onLoad(int index);
     }
 
     public SwipyRefreshLayoutDirection getDirection() {
