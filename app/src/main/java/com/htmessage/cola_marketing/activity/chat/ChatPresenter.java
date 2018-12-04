@@ -28,6 +28,7 @@ import com.htmessage.cola_marketing.activity.chat.call.VideoOutgoingActivity;
 import com.htmessage.cola_marketing.activity.chat.call.VoiceOutgoingActivity;
 import com.htmessage.cola_marketing.activity.chat.file.browser.FileBrowserActivity;
 import com.htmessage.cola_marketing.activity.chat.location.GdMapActivity;
+import com.htmessage.cola_marketing.activity.chat.prevideocall.PreVideoCallActivity;
 import com.htmessage.cola_marketing.activity.chat.video.CaptureVideoActivity;
 import com.htmessage.cola_marketing.domain.User;
 import com.htmessage.cola_marketing.manager.ContactsManager;
@@ -60,6 +61,7 @@ import org.anyrtc.meet_kit.RTMeetKit;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,7 +75,6 @@ import top.zibin.luban.OnCompressListener;
  * Created by dell on 2017/7/1.
  */
 public class ChatPresenter implements ChatContract.Presenter {
-
     private List<HTMessage> htMessageList;
     private ChatContract.View chatView;
     private String chatTo;
@@ -86,36 +87,69 @@ public class ChatPresenter implements ChatContract.Presenter {
     private static final int REQUEST_CODE_SELECT_TRANSFER = 7;
     private static final int REQUEST_CODE_VIDEO_CALL = 8;
     private static final int REQUEST_CODE_VIOCE_CALL = 9;
+
     private List<JSONObject> jsonObjects = new ArrayList<>();
+    private JSONObject extJSON = new JSONObject();
 
     private File cameraFile;
     private int chatType = 1;
-    private Handler mainHandler = new Handler() {
+//    private Handler mainHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case 1000:
+//                    HTMessage htMessage = (HTMessage) msg.obj;
+//                    htMessageList.add(htMessage);
+//                    chatView.refreshListView();
+//                    break;
+//                case 1001:
+//                    chatView.refreshListView();
+//                    break;
+//                case 1002:
+//                    chatView.refreshListView();
+//                    break;
+//                case 1003:
+//                    String filePath = (String) msg.obj;
+//                    sendImageMessage(filePath);
+//                    break;
+//            }
+//        }
+//    };
+
+    private MyHandler mainHandler = new MyHandler(this);
+    private static final class MyHandler extends Handler {
+        WeakReference<ChatPresenter> reference;
+
+        MyHandler(ChatPresenter presenter) {
+            reference = new WeakReference<>(presenter);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
-                case 1000:
-                    HTMessage htMessage = (HTMessage) msg.obj;
-                    htMessageList.add(htMessage);
-                    chatView.refreshListView();
-                    break;
-                case 1001:
-                    chatView.refreshListView();
-                    break;
-                case 1002:
-                    chatView.refreshListView();
-                    break;
-                case 1003:
-                    String filePath = (String) msg.obj;
-                    sendImageMessage(filePath);
-                    break;
-
+            ChatPresenter presenter = reference.get();
+            if (presenter != null) {
+                switch (msg.what) {
+                    case 1000:
+                        HTMessage htMessage = (HTMessage) msg.obj;
+                        presenter.htMessageList.add(htMessage);
+                        presenter.chatView.refreshListView();
+                        break;
+                    case 1001:
+                        presenter.chatView.refreshListView();
+                        break;
+                    case 1002:
+                        presenter.chatView.refreshListView();
+                        break;
+                    case 1003:
+                        String filePath = (String) msg.obj;
+                        presenter.sendImageMessage(filePath);
+                        break;
+                }
             }
-
         }
-    };
-    private JSONObject extJSON = new JSONObject();
+    }
 
     public ChatPresenter(ChatContract.View view, String chatTo, int chatType) {
         this.chatTo = chatTo;
@@ -238,7 +272,6 @@ public class ChatPresenter implements ChatContract.Presenter {
         }
     }
 
-
     @Override
     public void onNewMessage(HTMessage htMessage) {
         if (htMessage.getUsername().contains(chatTo)) {
@@ -248,7 +281,6 @@ public class ChatPresenter implements ChatContract.Presenter {
             chatView.refreshListView();
             HTClient.getInstance().conversationManager().markAllMessageRead(chatTo);
         }
-
     }
 
     @Override
@@ -269,7 +301,6 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     @Override
     public void sendCopyMessage(final String copyType, final String localPath, final HTMessage message1, String imagePath) {
-
         switch (copyType) {
             case "file":
                 HTMessageFileBody fileBody = (HTMessageFileBody) message1.getBody();
@@ -300,7 +331,6 @@ public class ChatPresenter implements ChatContract.Presenter {
                 sendMessage(locationSendMessage);
                 break;
         }
-
     }
 
     private Activity getActivity() {
@@ -505,11 +535,11 @@ public class ChatPresenter implements ChatContract.Presenter {
      */
     private void startVideoCall() {
         if (chatType == MessageUtils.CHAT_GROUP) {
-//            Intent intent = new Intent(getActivity(), PreVideoCallActivity.class);
-//            intent.putExtra("mode", RTMeetKit.RTCVideoLayout.RTC_V_1X3.ordinal());
-//            intent.putExtra("groupId", chatTo);
-//            intent.putExtra("isAgain", false);
-//            startActivityForResult(intent,REQUEST_CODE_VIDEO_CALL);
+            Intent intent = new Intent(getActivity(), PreVideoCallActivity.class);
+            intent.putExtra("mode", RTMeetKit.RTCVideoLayout.RTC_V_1X3.ordinal());
+            intent.putExtra("groupId", chatTo);
+            intent.putExtra("isAgain", false);
+            startActivityForResult(intent,REQUEST_CODE_VIDEO_CALL);
         } else {
             Intent intent = new Intent(getActivity(), VideoOutgoingActivity.class);
             intent.putExtra("mode", RTMeetKit.RTCVideoLayout.RTC_V_1X3.ordinal());
@@ -557,7 +587,6 @@ public class ChatPresenter implements ChatContract.Presenter {
                         list.add(cameraFile.getAbsolutePath());
                         compressMore(list);
                     }
-
                     break;
                 case REQUEST_CODE_LOCAL:
                     if (data != null) {

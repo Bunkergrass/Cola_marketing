@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.htmessage.cola_marketing">
 
+    <uses-sdk android:targetSdkVersion="28"
+        android:minSdkVersion="21"/>
+
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -238,6 +241,10 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 视频会议界面 -->
+        <activity android:name=".activity.chat.prevideocall.PreVideoCallActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
         <activity
             android:name=".activity.chat.call.VideoIncomingActivity"
             android:launchMode="singleTask"

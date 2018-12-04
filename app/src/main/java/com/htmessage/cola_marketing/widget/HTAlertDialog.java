@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.htmessage.cola_marketing.R;
+import com.htmessage.cola_marketing.utils.DensityUtil;
 
 /**
  * Created by huangfangyi on 2016/7/3.\
@@ -28,11 +30,14 @@ public class HTAlertDialog {
         dlg.show();
         Window window = dlg.getWindow();
         window.setContentView(R.layout.dialog_alert_ht);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = DensityUtil.dp2px(context,320);
+        window.setAttributes(lp);
+
         if (title != null) {
             window.findViewById(R.id.ll_title).setVisibility(View.VISIBLE);
             TextView tv_title = window.findViewById(R.id.tv_title);
             tv_title.setText(title);
-
         }
         //默认是2个item--最多支持5个，如需增加，请修改布局文件
         LinearLayout[] linearLayouts=new LinearLayout[]{

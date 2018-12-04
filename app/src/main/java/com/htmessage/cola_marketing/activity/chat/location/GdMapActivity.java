@@ -37,7 +37,6 @@ import java.io.IOException;
 public class GdMapActivity extends BaseActivity implements AMapLocationListener, LocationSource {
     private MapView amapView;
     private AMap aMap;//地图对象
-    //private Button sendButton = null;
     static AMapLocation lastLocation = null;
     private Marker marker;//图钉
 
@@ -74,7 +73,6 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
         //启动定位
         mLocationClient.startLocation();
     }
-
 
     private void getData() {
         Intent intent = getIntent();
@@ -113,9 +111,6 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
             //定位的小图标 默认是蓝点
             MyLocationStyle myLocationStyle = new MyLocationStyle();
             myLocationStyle.showMyLocation(true);
-//        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marka));
-//        myLocationStyle.radiusFillColor(android.R.color.transparent);
-//        myLocationStyle.strokeColor(android.R.color.transparent);
             aMap.setMyLocationStyle(myLocationStyle);
             //地图点击，设置marker
 //            aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
@@ -141,40 +136,6 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
                 }
             });
         }
-
-//        if (latitude == 0) {
-//            showProgross();
-//            startLocation();
-//        } else {
-//            sendButton.setVisibility(View.GONE);
-//            final double longtitude = getIntent().getDoubleExtra("longitude", 0);
-//            final String address = getIntent().getStringExtra("address");
-//            type = getIntent().getStringExtra("type");
-//            //设置缩放级别
-//            aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
-//            //将地图移动到定位点
-//            aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(latitude, longtitude)));
-//            //添加图钉
-//            MarkerOptions options = getMarkerOptions(latitude, longtitude, address);
-//            marker = aMap.addMarker(options);
-//            aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
-//                @Override
-//                public boolean onMarkerClick(Marker marker) {
-//                    startLocation();
-//                    return false;
-//                }
-//            });
-//
-//            aMap.setOnInfoWindowClickListener(new AMap.OnInfoWindowClickListener() {
-//                @Override
-//                public void onInfoWindowClick(Marker marker) {
-//                    if (marker.isInfoWindowShown()){
-//                        marker.hideInfoWindow();
-//                    }
-//                    showCityPup(fromLat, fromLng, fromAddress, String.valueOf(latitude), String.valueOf(longtitude), address);
-//                }
-//            });
-//        }
     }
 
     private void setListener() {

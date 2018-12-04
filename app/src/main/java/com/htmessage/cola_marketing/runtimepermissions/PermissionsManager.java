@@ -27,9 +27,9 @@ public class PermissionsManager {
 
     private static final String TAG = PermissionsManager.class.getSimpleName();
 
-    private final Set<String> mPendingRequests = new HashSet<String>(1);
-    private final Set<String> mPermissions = new HashSet<String>(1);
-    private final List<WeakReference<PermissionsResultAction>> mPendingActions = new ArrayList<WeakReference<PermissionsResultAction>>(1);
+    private final Set<String> mPendingRequests = new HashSet<>(1);
+    private final Set<String> mPermissions = new HashSet<>(1);
+    private final List<WeakReference<PermissionsResultAction>> mPendingActions = new ArrayList<>(1);
 
     private static PermissionsManager mInstance = null;
 
@@ -76,7 +76,7 @@ public class PermissionsManager {
     @NonNull
     private synchronized String[] getManifestPermissions(@NonNull final Activity activity) {
         PackageInfo packageInfo = null;
-        List<String> list = new ArrayList<String>(1);
+        List<String> list = new ArrayList<>(1);
         try {
             Log.d(TAG, activity.getPackageName());
             packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_PERMISSIONS);
@@ -111,7 +111,7 @@ public class PermissionsManager {
             return;
         }
         action.registerPermissions(permissions);
-        mPendingActions.add(new WeakReference<PermissionsResultAction>(action));
+        mPendingActions.add(new WeakReference<>(action));
     }
 
     /**
@@ -346,7 +346,7 @@ public class PermissionsManager {
     private List<String> getPermissionsListToRequest(@NonNull Activity activity,
                                                      @NonNull String[] permissions,
                                                      @Nullable PermissionsResultAction action) {
-        List<String> permList = new ArrayList<String>(permissions.length);
+        List<String> permList = new ArrayList<>(permissions.length);
         for (String perm : permissions) {
             if (!mPermissions.contains(perm)) {
                 if (action != null) {

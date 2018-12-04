@@ -187,7 +187,8 @@ public class ChatFragment extends Fragment implements ChatContract.View, SwipeRe
     }
 
     private void showMsgDialog(final HTMessage message, final int postion) {
-        HTAlertDialog HTAlertDialog = new HTAlertDialog(getActivity(), null, new String[]{getActivity().getString(R.string.delete), getActivity().getString(R.string.copy), getActivity().getString(R.string.forward)});
+        HTAlertDialog HTAlertDialog = new HTAlertDialog(getActivity(), null
+                , new String[]{getActivity().getString(R.string.delete), getActivity().getString(R.string.copy), getActivity().getString(R.string.forward)});
         if (message.getDirect() == HTMessage.Direct.SEND) {
             HTAlertDialog = new HTAlertDialog(getActivity(), null, new String[]{getActivity().getString(R.string.delete), getActivity().getString(R.string.copy), getActivity().getString(R.string.forward), getActivity().getString(R.string.reback)});
         }

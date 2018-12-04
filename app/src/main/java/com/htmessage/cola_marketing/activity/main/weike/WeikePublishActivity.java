@@ -307,7 +307,7 @@ public class WeikePublishActivity extends BaseActivity {
         window.setContentView(R.layout.dialog_social_main);
 
         WindowManager.LayoutParams lp = window.getAttributes();
-        lp.width = DensityUtil.dp2px(WeikePublishActivity.this,280);
+        lp.width = DensityUtil.dp2px(WeikePublishActivity.this,320);
         window.setAttributes(lp);
 
         TextView tv_paizhao = window.findViewById(R.id.tv_content1);
