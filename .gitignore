@@ -10,8 +10,8 @@
 .externalNativeBuild
 
 #My
-/app/src/androidTest
-/app/src/test
-/app/debug
-/app/release
-/app/libs
+app/src/androidTest
+app/src/test
+app/debug
+app/release
+app/libs
