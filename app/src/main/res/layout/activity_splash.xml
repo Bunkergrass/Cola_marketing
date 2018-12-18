@@ -2,10 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/splash_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SplashActivity"
-    android:background="@color/LightBlue">
+    tools:context=".activity.SplashActivity">
+
+    <ImageView
+        android:id="@+id/splash_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/app_splash"
+        android:scaleType="centerCrop"/>
 
 </FrameLayout>

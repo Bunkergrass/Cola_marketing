@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,7 +13,6 @@ import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.BaseActivity;
 import com.htmessage.cola_marketing.activity.chat.ChatActivity;
 import com.htmessage.sdk.client.HTClient;
-import com.htmessage.sdk.manager.GroupManager;
 import com.htmessage.sdk.model.HTGroup;
 import com.htmessage.sdk.utils.MessageUtils;
 

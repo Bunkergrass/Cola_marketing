@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.htmessage.cola_marketing.HTConstant;
@@ -29,9 +31,9 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        FrameLayout splash_root = findViewById(R.id.splash_root);
+        ImageView splash_root = findViewById(R.id.splash_root);
         AlphaAnimation animation = new AlphaAnimation(0.5f, 1.0f);
-        animation.setDuration(1000);
+        animation.setDuration(1500);
         splash_root.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -45,7 +47,7 @@ public class SplashActivity extends Activity {
                     //UpdateLocalLoginTimeUtils.sendLocalTimeToService(SplashActivity.this);
                     sendLocalTimeToService(SplashActivity.this);
                     LocalUserManager.getInstance().saveVersionDialog(false);
-                    Intent intent=new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else {

@@ -1,9 +1,15 @@
 package com.htmessage.cola_marketing.activity.chat.location;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
@@ -72,6 +78,8 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
         mLocationClient.setLocationOption(mLocationOption);
         //启动定位
         mLocationClient.startLocation();
+        //启动后台定位，第一个参数为通知栏ID，建议整个APP使用一个
+        mLocationClient.enableBackgroundLocation(2001, buildNotification());
     }
 
     private void getData() {
@@ -138,9 +146,7 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
         }
     }
 
-    private void setListener() {
-
-    }
+    private void setListener() {}
 
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
@@ -182,61 +188,6 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
                 Log.e("AmapErr",errText);
             }
         }
-//        if (amapLocation == null) {
-//            return;
-//        }
-//        sendButton.setEnabled(true);
-//        if (lastLocation != null) {
-//            if (lastLocation.getLatitude() == amapLocation.getLatitude() && lastLocation.getLongitude() == amapLocation.getLongitude()) {
-//                Log.d("map", "same type_location, skip refresh");
-//                // mMapView.refresh(); //need this refresh?
-//                return;
-//            }
-//        }
-//        dismissDialog();
-//        lastLocation = amapLocation;
-//        if (amapLocation.getErrorCode() == 0) {
-//            //定位成功回调信息，设置相关消息
-//            amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
-//            amapLocation.getAccuracy();//获取精度信息
-//            amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-//            amapLocation.getCountry();//国家信息
-//            amapLocation.getProvince();//省信息
-//            amapLocation.getCity();//城市信息
-//            amapLocation.getDistrict();//城区信息
-//            amapLocation.getStreet();//街道信息
-//            amapLocation.getStreetNum();//街道门牌号信息
-//            amapLocation.getCityCode();//城市编码
-//            amapLocation.getAdCode();//地区编码
-//            if (latitude != 0) {
-//                fromLat = String.valueOf(amapLocation.getLatitude());//获取纬度
-//                fromLng = String.valueOf(amapLocation.getLongitude());//获取经度
-//                fromAddress = amapLocation.getAddress();
-//            } else {
-////                aMap.clear();
-//                //设置缩放级别
-//                aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
-//                //将地图移动到定位点
-//                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude())));
-//                //点击定位按钮 能够将地图的中心移动到定位点
-//                mListener.onLocationChanged(amapLocation);
-//            }
-//            //获取定位信息
-//            StringBuffer buffer = new StringBuffer();
-//            buffer.append(amapLocation.getCountry() + "" + amapLocation.getProvince() + "" + amapLocation.getCity() + "" + amapLocation.getProvince() + "" + amapLocation.getDistrict() + "" + amapLocation.getStreet() + "" + amapLocation.getStreetNum());
-//            Log.d("AmapError", "AmapError:" + buffer.toString());
-//            stopLocation();
-//        } else {
-//            dismissDialog();
-//            if (latitude == 0){
-//                CommonUtils.showToastShort(GdMapActivity.this, R.string.location_failed);
-//            }
-//            //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-//            Log.e("AmapError", "type_location Error, ErrCode:"
-//                    + amapLocation.getErrorCode() + ", errInfo:"
-//                    + amapLocation.getErrorInfo());
-//
-//        }
     }
 
     //激活定位
@@ -274,9 +225,49 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
         mListener = null;
         if (mLocationClient != null) {
             mLocationClient.stopLocation();
+            mLocationClient.disableBackgroundLocation(true);
             mLocationClient.onDestroy();
         }
         mLocationClient = null;
+    }
+
+    /**
+     * copy from amap api
+     */
+    private static final String NOTIFICATION_CHANNEL_NAME = "BackgroundLocation";
+    private NotificationManager notificationManager = null;
+    boolean isCreateChannel = false;
+    @SuppressLint("NewApi")
+    private Notification buildNotification() {
+
+        Notification.Builder builder = null;
+        Notification notification = null;
+        if(android.os.Build.VERSION.SDK_INT >= 26) {
+            //Android O上对Notification进行了修改，如果设置的targetSDKVersion>=26建议使用此种方式创建通知栏
+            if (null == notificationManager) {
+                notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            }
+            String channelId = getPackageName();
+            if(!isCreateChannel) {
+                NotificationChannel notificationChannel = new NotificationChannel(channelId,
+                        NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+                notificationChannel.enableLights(true);//是否在桌面icon右上角展示小圆点
+                notificationChannel.setLightColor(Color.BLUE); //小圆点颜色
+                notificationChannel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
+                notificationManager.createNotificationChannel(notificationChannel);
+                isCreateChannel = true;
+            }
+            builder = new Notification.Builder(getApplicationContext(), channelId);
+        } else {
+            builder = new Notification.Builder(getApplicationContext());
+        }
+        builder.setSmallIcon(R.mipmap.app_logo)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText("正在后台运行")
+                .setWhen(System.currentTimeMillis());
+
+        notification = builder.build();
+        return notification;
     }
 
     private void showProgross() {
@@ -416,10 +407,8 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
      * @param bitmap
      * @return
      */
-    public static Bitmap cropBitmap(Bitmap bitmap)
-    {
-        if (bitmap == null)
-        {
+    public static Bitmap cropBitmap(Bitmap bitmap) {
+        if (bitmap == null) {
             return null;
         }
 
@@ -436,8 +425,7 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
 
          Bitmap bmp = Bitmap.createBitmap(bitmap, retX, retY, nw, nh, null,
                 false);
-        if (bitmap != null && !bitmap.equals(bmp) && !bitmap.isRecycled())
-        {
+        if (bitmap != null && !bitmap.equals(bmp) && !bitmap.isRecycled()) {
             bitmap.recycle();
             bitmap = null;
         }
@@ -477,6 +465,8 @@ public class GdMapActivity extends BaseActivity implements AMapLocationListener,
             if (mLocationClient.isStarted()) {
                 // 停止定位
                 mLocationClient.stopLocation();
+                //关闭后台定位，参数为true时会移除通知栏，为false时不会移除通知栏，但是可以手动移除
+                mLocationClient.disableBackgroundLocation(true);
             }
         }
     }

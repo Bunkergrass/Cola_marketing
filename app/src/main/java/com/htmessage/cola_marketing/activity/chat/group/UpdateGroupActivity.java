@@ -35,13 +35,14 @@ public class UpdateGroupActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_info);
+
         int type = getIntent().getIntExtra("type", 1);
         groupId = getIntent().getStringExtra("groupId");
-        RelativeLayout title = (RelativeLayout) findViewById(R.id.title);
-        title.setVisibility(View.VISIBLE);
-        TextView titleTV = (TextView) findViewById(R.id.tv_title);
-        TextView saveTV = (TextView) findViewById(R.id.tv_save);
-        EditText infoET = (EditText) findViewById(R.id.et_info);
+
+        TextView titleTV = findViewById(R.id.tv_title);
+        TextView saveTV = findViewById(R.id.tv_save);
+        EditText infoET = findViewById(R.id.et_info);
+
         htGroup= HTClient.getInstance().groupManager().getGroup(groupId);
         if (htGroup == null) {
            finish();
@@ -52,7 +53,6 @@ public class UpdateGroupActivity extends BaseActivity {
 
     private void initView(final int type, TextView titleTV, TextView saveTV, final EditText infoET) {
         String title = "";
-        String key = "";
 
         switch (type) {
             case TYPE_GROUP_NAME:
@@ -62,14 +62,12 @@ public class UpdateGroupActivity extends BaseActivity {
             case TYPE_GROUP_DESC:
                 title =getString(R.string.change_group_desc);
                 infoET.setHint(htGroup.getGroupDesc());
-
                 break;
         }
         titleTV.setText(title);
         saveTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 updateInServer(type, infoET.getText().toString().trim());
             }
         });
@@ -77,7 +75,6 @@ public class UpdateGroupActivity extends BaseActivity {
     }
 
     private void updateInServer(int type, final String value) {
-
         if (  TextUtils.isEmpty(value) ) {
             return;
         }

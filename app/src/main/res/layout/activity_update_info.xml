@@ -7,8 +7,6 @@
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
         android:background="@drawable/stroke_bottom" >
@@ -24,21 +22,12 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/icon_back" />
 
-        <View
-            android:id="@+id/view_temp"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_toRightOf="@id/iv_back"
-            android:background="@color/LightBlue" />
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/view_temp"
+            android:layout_toRightOf="@+id/iv_back"
             android:layout_marginLeft="10dp"
             android:text="@string/modify_name"
             android:textColor="@color/LightBlue"
