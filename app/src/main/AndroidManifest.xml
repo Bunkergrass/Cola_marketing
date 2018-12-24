@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.htmessage.cola_marketing">
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -19,34 +19,34 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 读写扩展存储，向扩展卡读写数据 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!--网络-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--定位-->
+    <!-- 定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
         android:name=".HTApp"
-        tools:replace="android:allowBackup"
         android:allowBackup="false"
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
 
         <!-- ht service -->
         <service
@@ -97,10 +97,11 @@
         </provider>
         <!-- service -->
 
+
         <!-- 高德的SDK -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="d9a93a6c90d951d2ce4392ad66dfbaee"/>
+            android:value="d9a93a6c90d951d2ce4392ad66dfbaee" />
         <!-- 高德所用的定位service -->
         <service android:name="com.amap.api.location.APSService" />
 
@@ -184,11 +185,12 @@
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <!--图片压缩-->
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity"
-            android:theme="@style/horizontal_slide"
+        <!-- 图片压缩 -->
+        <activity
+            android:name="com.soundcloud.android.crop.CropImageActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:theme="@style/horizontal_slide" />
         <!-- WebView -->
         <activity
             android:name=".activity.WebViewActivity"
@@ -244,7 +246,8 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 视频会议界面 -->
-        <activity android:name=".activity.chat.prevideocall.PreVideoCallActivity"
+        <activity
+            android:name=".activity.chat.prevideocall.PreVideoCallActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
@@ -484,11 +487,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" />
-        <!--我的二维码-->
-        <activity android:name=".activity.main.qrcode.MyQrActivity"
+        <!-- 我的二维码 -->
+        <activity
+            android:name=".activity.main.qrcode.MyQrActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.chat.group.GroupsClassifiedActivity"></activity>
     </application>
 
 </manifest>

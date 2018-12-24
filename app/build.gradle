@@ -24,6 +24,12 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "cola_${variant.versionName}_${variant.buildType.name}.apk"
+            }
+    }
 }
 
 repositories {

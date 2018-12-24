@@ -110,7 +110,7 @@ public class ProjectDetailFragment extends Fragment {
         DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String strTime = year + "-" + month + "-" + dayOfMonth;
+                String strTime = year + "-" + (month+1) + "-" + dayOfMonth;
                 hintSetView.setHintText(strTime);
                 try {
                     if (isStart)

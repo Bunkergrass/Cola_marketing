@@ -15,6 +15,7 @@ import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.BaseActivity;
 import com.htmessage.cola_marketing.activity.myLists.ListAdapterListener;
+import com.htmessage.cola_marketing.activity.myLists.RecyclerItemClickListener;
 import com.htmessage.cola_marketing.utils.CommonUtils;
 import com.htmessage.cola_marketing.utils.OkHttpUtils;
 import com.htmessage.cola_marketing.utils.Param;
@@ -63,9 +64,11 @@ public class MyAppliesActivity extends BaseActivity implements SwipyRefreshLayou
         rv_applies.setLayoutManager(manager);
         rv_applies.setAdapter(adapter);
 
-        adapter.setListener(new ListAdapterListener() {
+        rv_applies.addOnItemTouchListener(new RecyclerItemClickListener(this, rv_applies, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onClick(int position, View itemView) {}
+            public void onClick(int position, View itemView) {
+
+            }
 
             @Override
             public void onLongClick(final int position, View itemView) {
@@ -79,7 +82,7 @@ public class MyAppliesActivity extends BaseActivity implements SwipyRefreshLayou
                     public void onNegative() {}
                 });
             }
-        });
+        }));
 
         tl_applies.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

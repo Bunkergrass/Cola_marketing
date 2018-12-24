@@ -10,15 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@drawable/list_item_bg_white"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/iv_avatar"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:src="@drawable/icon_contacts2" />
 
         <TextView
@@ -26,19 +27,19 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_toEndOf="@id/iv_avatar"
             android:text="@string/new_friend"
             android:textColor="#353535"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_unread"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/unread_count_bg"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/unread_dot"
             android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="12sp"

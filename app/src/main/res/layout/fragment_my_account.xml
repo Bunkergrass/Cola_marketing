@@ -35,8 +35,8 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         android:background="@color/white"
         android:gravity="center">
         <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
@@ -55,6 +55,14 @@
             android:gravity="center"
             app:setting_img="@drawable/icon_me_wallet"
             app:setting_text="钱包"/>
+        <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
+            android:id="@+id/hfv_album"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:setting_img="@drawable/icon_me_pic"
+            app:setting_text="相册"/>
         <com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView
             android:id="@+id/hfv_setting"
             android:layout_weight="1"
@@ -83,5 +91,13 @@
         android:layout_height="wrap_content"
         app:setting_img="@drawable/icon_me_xiaoshou"
         app:setting_text="我的销售"/>
+
+    <com.htmessage.cola_marketing.activity.main.widget.SettingsView
+        android:id="@+id/sv_my_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:setting_img="@drawable/icon_me_tutor"
+        app:setting_text="编辑导师资料"/>
 
 </LinearLayout>

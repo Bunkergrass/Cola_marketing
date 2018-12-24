@@ -46,23 +46,11 @@ public class AppliesAdapter extends RecyclerView.Adapter<AppliesAdapter.ViewHold
         this.list = list;
     }
 
-    private ListAdapterListener listener;
-    public void setListener(ListAdapterListener listener) {
-        this.listener = listener;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_my_apply,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
-        view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                listener.onLongClick(holder.getAdapterPosition(),v);
-                return true;
-            }
-        });
         return holder;
     }
 

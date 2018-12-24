@@ -43,7 +43,7 @@ public class TiyanActivity extends BaseActivity implements SwipyRefreshLayout.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiyan);
-        setTitle("体验商城");
+        setTitle("营销学堂");
 
         tl_tiyan = findViewById(R.id.tl_tiyan);
         rv_tiyan = findViewById(R.id.rv_tiyan);

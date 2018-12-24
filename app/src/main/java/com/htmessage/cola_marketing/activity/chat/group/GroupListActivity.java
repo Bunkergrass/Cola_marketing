@@ -2,6 +2,7 @@ package com.htmessage.cola_marketing.activity.chat.group;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,6 +81,8 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
                 startActivity(new Intent(GroupListActivity.this, GroupAddMembersActivity.class));
                 break;
             case R.id.ll_my_groups:
+//                startActivity(new Intent(GroupListActivity.this, GroupsClassifiedActivity.class)
+//                        .putExtra("listType",0));
                 break;
             case R.id.ll_top_groups:
                 break;
@@ -98,7 +101,6 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
         groupAdapter.notifyDataSetChanged();
         tv_total.setText(grouplist.size()+getString(R.string.group_size));
     }
-
 
     @Override
     protected void onDestroy() {

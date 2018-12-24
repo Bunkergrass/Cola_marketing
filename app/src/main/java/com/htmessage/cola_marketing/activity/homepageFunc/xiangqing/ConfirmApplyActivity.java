@@ -173,8 +173,10 @@ public class ConfirmApplyActivity extends BaseActivity implements SwipyRefreshLa
         new OkHttpUtils(this).post(params, HTConstant.URL_GO_APPLY, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                if (jsonObject.getInteger("code") == 1)
+                if (jsonObject.getInteger("code") == 1) {
                     Toast.makeText(ConfirmApplyActivity.this,R.string.sending_success,Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 else
                     Toast.makeText(ConfirmApplyActivity.this,R.string.sending_failed,Toast.LENGTH_SHORT).show();
             }

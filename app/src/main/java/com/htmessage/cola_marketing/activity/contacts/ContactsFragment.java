@@ -167,7 +167,6 @@ public class ContactsFragment extends Fragment implements ContactsView,View.OnCl
     public void showInvitionCount(int count) {
         if (count != 0) {
             tv_unread.setVisibility(View.VISIBLE);
-            tv_unread.setText(count+"");
         } else {
             tv_unread.setVisibility(View.GONE);
         }
