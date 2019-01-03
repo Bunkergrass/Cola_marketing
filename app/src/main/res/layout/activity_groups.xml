@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#EBEBEB"
     android:orientation="vertical"
     tools:context=".activity.chat.group.GroupListActivity">
 
@@ -27,55 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:text="新的小组"
+            android:text="新的群"
             android:textColor="@color/text_color_dark"
             android:textSize="16sp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_top_groups"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_list_item"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/list_item_bg_white">
-        <ImageView
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_marginStart="13dp"
-            android:gravity="center"
-            android:src="@drawable/icon_zhanlue_zhiding" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:text="置顶小组"
-            android:textColor="@color/text_color_dark"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_my_groups"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_list_item"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/list_item_bg_white">
-        <ImageView
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_marginStart="13dp"
-            android:gravity="center"
-            android:src="@drawable/icon_zhanlue_chuangjian" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:text="我创建的小组"
-            android:textColor="@color/text_color_dark"
-            android:textSize="16sp" />
-    </LinearLayout>
-
 
     <ListView
         android:id="@+id/groupListView"

@@ -25,7 +25,10 @@ import com.htmessage.cola_marketing.activity.chat.group.GroupListActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.AptitudeExam.ExamActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.baokuan.BaokuanActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.danpin.DanpinActivity;
+import com.htmessage.cola_marketing.activity.homepageFunc.squad.SquadListActivity;
 import com.htmessage.cola_marketing.activity.homepageFunc.tiyan.TiyanActivity;
+import com.htmessage.cola_marketing.activity.homepageFunc.tutor.TutorListActivity;
+import com.htmessage.cola_marketing.activity.homepageFunc.tutor.TutorListAdapter;
 import com.htmessage.cola_marketing.activity.main.weike.WeikeActivity;
 import com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView;
 import com.htmessage.cola_marketing.activity.main.widget.TradeItemView;
@@ -132,9 +135,10 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
                 openShop("http://klshop.kakusi.cn/index.php?s=/wap","体验商城");
                 break;
             case R.id.home_tutor:
+                startActivity(new Intent(getActivity(), TutorListActivity.class));
                 break;
             case R.id.home_zhanlue:
-                startActivity(new Intent(getActivity(), GroupListActivity.class));
+                startActivity(new Intent(getActivity(), SquadListActivity.class));
                 break;
             case R.id.home_ziyuan:
                 startActivity(new Intent(getActivity(), WeikeActivity.class));

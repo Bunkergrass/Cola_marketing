@@ -232,7 +232,15 @@ public class CaptureActivity extends BaseActivity implements
      */
     private void scanDeviceSuccess(String rawResult, Bundle bundle) {
         if (!TextUtils.isEmpty(rawResult)) {
-            JSONObject object = JSONObject.parseObject(rawResult);
+            JSONObject object;
+            try {
+                object = JSONObject.parseObject(rawResult);
+            } catch (Exception e){
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), R.string.code_is_not_invlide, Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
             int codeType = object.getIntValue("codeType");
             switch (codeType) {
                 case 1:

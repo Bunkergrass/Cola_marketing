@@ -16,8 +16,7 @@ public class HintSetView extends LinearLayout {
     private String hint_text;
     private boolean editable;
 
-//    private TextView tv_hint_text;
-    private EditText et_hint_text;
+    public EditText et_hint_text;
     private ImageView iv_hint_go;
 
     public HintSetView(Context context){
@@ -42,7 +41,6 @@ public class HintSetView extends LinearLayout {
         super.onFinishInflate();
 
         TextView tv_key_text = findViewById(R.id.tv_key_text);
-//        tv_hint_text = findViewById(R.id.tv_hint_text);
         iv_hint_go = findViewById(R.id.iv_hint_go);
         et_hint_text = findViewById(R.id.et_hint_text);
 
@@ -51,15 +49,6 @@ public class HintSetView extends LinearLayout {
             iv_hint_go.setVisibility(VISIBLE);
         } else {
             iv_hint_go.setVisibility(GONE);
-//            if (editable){
-//                et_hint_text.setHint(hint_text);
-//                et_hint_text.setVisibility(VISIBLE);
-//                tv_hint_text.setVisibility(GONE);
-//            } else {
-//                tv_hint_text.setText(hint_text);
-//                et_hint_text.setVisibility(GONE);
-//                tv_hint_text.setVisibility(VISIBLE);
-//            }
             et_hint_text.setEnabled(editable);
             et_hint_text.setHint(hint_text);
         }
@@ -71,25 +60,12 @@ public class HintSetView extends LinearLayout {
             iv_hint_go.setVisibility(VISIBLE);
         } else {
             iv_hint_go.setVisibility(GONE);
-//            if (editable){
-//                et_hint_text.setHint(hint_text);
-//                et_hint_text.setVisibility(VISIBLE);
-//                tv_hint_text.setVisibility(GONE);
-//            } else {
-//                tv_hint_text.setText(hint_text);
-//                et_hint_text.setVisibility(GONE);
-//                tv_hint_text.setVisibility(VISIBLE);
-//            }
             et_hint_text.setEnabled(editable);
             et_hint_text.setHint(hint_text);
         }
     }
 
     public String getHintText() {
-//        if (editable)
-//            return et_hint_text.getText().toString();
-//        else
-//            return tv_hint_text.getText().toString();
         return et_hint_text.getText().toString();
     }
 }

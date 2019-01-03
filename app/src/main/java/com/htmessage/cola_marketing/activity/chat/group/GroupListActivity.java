@@ -24,7 +24,7 @@ import java.util.List;
 public class GroupListActivity extends BaseActivity implements View.OnClickListener {
     private ListView groupListView;
     private TextView tv_total;
-    private LinearLayout ll_new_group,ll_top_groups,ll_my_groups;
+    private LinearLayout ll_new_group;
 
     protected List<HTGroup> grouplist = new ArrayList<>();
     private GroupsListAdapter groupAdapter;
@@ -43,9 +43,7 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
     private void initView() {
         setTitle(R.string.group_chat);
         groupListView = findViewById(R.id.groupListView);
-        ll_my_groups = findViewById(R.id.ll_my_groups);
         ll_new_group = findViewById(R.id.ll_new_group);
-        ll_top_groups = findViewById(R.id.ll_top_groups);
 
         View footerView = LayoutInflater.from(this).inflate(R.layout.item_group_footer, null);
         tv_total = footerView.findViewById(R.id.tv_total);
@@ -69,9 +67,7 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
-        ll_top_groups.setOnClickListener(this);
         ll_new_group.setOnClickListener(this);
-        ll_my_groups.setOnClickListener(this);
     }
 
     @Override
@@ -79,12 +75,6 @@ public class GroupListActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.ll_new_group:
                 startActivity(new Intent(GroupListActivity.this, GroupAddMembersActivity.class));
-                break;
-            case R.id.ll_my_groups:
-//                startActivity(new Intent(GroupListActivity.this, GroupsClassifiedActivity.class)
-//                        .putExtra("listType",0));
-                break;
-            case R.id.ll_top_groups:
                 break;
         }
     }

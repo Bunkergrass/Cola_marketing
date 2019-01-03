@@ -493,7 +493,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.chat.group.GroupsClassifiedActivity"></activity>
+        <activity android:name=".activity.chat.group.GroupsClassifiedActivity" />
+        <activity android:name=".activity.homepageFunc.tutor.TutorListActivity" />
+        <activity android:name=".activity.homepageFunc.tutor.TutorDetailActivity" />
+        <activity android:name=".activity.homepageFunc.tutor.TutorEditActivity" />
+        <activity android:name=".activity.homepageFunc.tutor.NewTutorActivity" />
+        <activity android:name=".activity.homepageFunc.squad.SquadListActivity" />
     </application>
 
 </manifest>

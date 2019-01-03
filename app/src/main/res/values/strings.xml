@@ -256,7 +256,7 @@
     <string name="mixin_can_not_has_chinese">ID不能包含中文</string>
     <string name="string_not_30">不能超过30个字符</string>
     <string name="scan_title">"二维码/条码 扫描"</string>
-    <string name="code_is_not_invlide">无效二维码</string>
+    <string name="code_is_not_invlide">不支持的二维码</string>
     <string name="scanning_image">扫面二维码图片</string>
     <string name="me_qrcode">我的身份二维码</string>
     <string name="wallet">钱包</string>
