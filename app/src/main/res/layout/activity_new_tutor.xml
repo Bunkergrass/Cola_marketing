@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.homepageFunc.tutor.NewTutorActivity">
+
+    <include layout="@layout/layout_title_bar"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_new_tutor_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:key_text="导师组名称"
+        app:hint_text="请输入"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_new_tutor_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="进群金额"
+        app:hint_text="请输入"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:visibility="gone"
+        android:id="@+id/hsv_new_tutor_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="导师组介绍"
+        app:hint_text="请输入"
+        app:editable="true"/>
+
+</LinearLayout>

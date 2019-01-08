@@ -8,9 +8,9 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="22dp"
-        android:background="#ebebeb"
+        android:background="@color/transparent"
         android:gravity="center_vertical"
-        android:paddingLeft="12dp"
+        android:paddingStart="12dp"
         android:textColor="#888888"
         android:textSize="14sp"
         android:visibility="gone" />
@@ -25,9 +25,9 @@
             android:id="@+id/iv_avatar"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:src="@drawable/default_avatar" />
 
         <TextView
@@ -35,10 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/iv_avatar"
             android:text="@string/app_name"
-            android:textColor="#353535"
+            android:textColor="@color/text_color_dark"
             android:textSize="16sp" />
         <View
             android:layout_alignParentBottom="true"
@@ -47,8 +47,7 @@
             android:layout_height="0.1dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:background="#d9d9d9"
-            />
+            android:background="#d9d9d9" />
 
     </RelativeLayout>
 

@@ -10,6 +10,8 @@
     <string name="zhongkuohao">[</string>
     <string name="zhongkuohao_msg">条]</string>
     <string name="app_name">可乐营销</string>
+    <string name="failed_please_retry">失败，请重试！</string>
+
     <string name="app_chat">会话</string>
     <string name="text_ack_msg">已读</string>
     <string name="text_delivered_msg">送达</string>

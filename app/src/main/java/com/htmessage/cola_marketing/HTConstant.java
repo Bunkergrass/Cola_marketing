@@ -95,6 +95,25 @@ public class HTConstant {
     public static final String URL_MAKE_TASK = BASE_IP + "task/make_task";
     public static final String URL_SHARE_TASK = BASE_IP + "task/share_task";
     public static final String URL_ADD_PRICE_ADDRESS = BASE_IP + "task/add_prize_address";
+    //导师、小组相关接口
+    public static final String URL_CREATE_GROUP = BASE_IP + "User_group/create_group";
+    public static final String URL_APPLY_ADD_GROUP = BASE_IP + "User_group/apply_add_group";
+    public static final String URL_GROUP_APPLY_LIST = BASE_IP + "User_group/group_apply_list";
+    public static final String URL_HANDLE_GROUP_APPLY = BASE_IP + "User_group/handle_group_apply";
+    public static final String URL_PAY_GROUP = BASE_IP + "User_group/pay_group";
+    public static final String URL_GROUP_LIST = BASE_IP + "User_group/group_list";
+    public static final String URL_GROUP_DETAIL = BASE_IP + "User_group/group_detail";
+    public static final String URL_SELECT_GROUP = BASE_IP + "User_group/select_group";
+    public static final String URL_TUTOR_DETAIL = BASE_IP + "User_group/tutor_detail";
+    public static final String URL_UP_TUTOR = BASE_IP + "User_group/up_tutor";
+    public static final String URL_UP_GROUP_PIC = BASE_IP + "User_group/up_group_pic";
+    public static final String URL_UP_GROUP_MONEY = BASE_IP + "User_group/up_group_money";
+    public static final String URL_UP_ORDER = BASE_IP + "User_group/up_order";
+    public static final String URL_TUTOR_LIST = BASE_IP + "User_group/tutor_list";
+    public static final String URL_TUTOR_LABEL_LIST = BASE_IP + "User_group/label_list";
+    public static final String URL_TUTOR_LABEL_ADD = BASE_IP + "User_group/add_label";
+    public static final String URL_TUTOR_LABEL_UP = BASE_IP + "User_group/up_label";
+    public static final String URL_TUTOR_LABEL_DEL = BASE_IP + "User_group/del_label";
 
 
     //文件/及图片上传接口

@@ -30,6 +30,7 @@
     <declare-styleable name="HintSetView">
         <attr name="key_text" format="string"/>
         <attr name="hint_text" format="string"/>
+        <attr name="edit_text" format="string"/>
         <attr name="editable" format="boolean"/>
     </declare-styleable>
 </resources>

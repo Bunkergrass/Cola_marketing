@@ -77,8 +77,8 @@ public class AwardActivity extends BaseActivity {
         btn_award.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hsv_name.getHintText().isEmpty() || et_tel.getText().toString().isEmpty()
-                        || hsv_addr.getHintText().isEmpty() || addr.isEmpty())
+                if (hsv_name.getText().isEmpty() || et_tel.getText().toString().isEmpty()
+                        || hsv_addr.getText().isEmpty() || addr.isEmpty())
                     Toast.makeText(AwardActivity.this,"请填写完整信息",Toast.LENGTH_SHORT).show();
                 else
                     postAddress();
@@ -101,9 +101,9 @@ public class AwardActivity extends BaseActivity {
         List<Param> params = new ArrayList<>();
         params.add(new Param("uid", HTApp.getInstance().getUsername()));
         params.add(new Param("task_id",taskId));
-        params.add(new Param("prize_name",hsv_name.getHintText()));
+        params.add(new Param("prize_name",hsv_name.getText()));
         params.add(new Param("prize_tel",et_tel.getText().toString()));
-        params.add(new Param("prize_address",addr+hsv_addr.getHintText()));
+        params.add(new Param("prize_address",addr+hsv_addr.getText()));
         new OkHttpUtils(this).post(params, HTConstant.URL_ADD_PRICE_ADDRESS, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {

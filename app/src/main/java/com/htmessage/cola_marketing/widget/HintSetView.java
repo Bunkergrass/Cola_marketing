@@ -14,6 +14,7 @@ import com.htmessage.cola_marketing.R;
 public class HintSetView extends LinearLayout {
     private String key_text;
     private String hint_text;
+    private String edit_text;
     private boolean editable;
 
     public EditText et_hint_text;
@@ -31,6 +32,7 @@ public class HintSetView extends LinearLayout {
         TypedArray array = context.obtainStyledAttributes(attr, R.styleable.HintSetView);
         key_text = array.getString(R.styleable.HintSetView_key_text);
         hint_text = array.getString(R.styleable.HintSetView_hint_text);
+        edit_text = array.getString(R.styleable.HintSetView_edit_text);
         editable = array.getBoolean(R.styleable.HintSetView_editable,false);
 
         array.recycle();
@@ -45,27 +47,61 @@ public class HintSetView extends LinearLayout {
         et_hint_text = findViewById(R.id.et_hint_text);
 
         tv_key_text.setText(key_text);
-        if (hint_text.isEmpty()) {
+        if (hint_text == null && edit_text == null) {
             iv_hint_go.setVisibility(VISIBLE);
         } else {
             iv_hint_go.setVisibility(GONE);
             et_hint_text.setEnabled(editable);
-            et_hint_text.setHint(hint_text);
+            if (hint_text!=null)
+                et_hint_text.setHint(hint_text);
+            if (edit_text!=null)
+                et_hint_text.setText(edit_text);
         }
+//        if (hint_text.isEmpty()) {
+//            iv_hint_go.setVisibility(VISIBLE);
+//        } else {
+//            iv_hint_go.setVisibility(GONE);
+//            et_hint_text.setEnabled(editable);
+//            et_hint_text.setHint(hint_text);
+//        }
     }
 
     public void setHintText(String hint) {
         this.hint_text = hint;
-        if (hint_text.isEmpty()) {
+        if (hint_text == null && edit_text == null) {
             iv_hint_go.setVisibility(VISIBLE);
         } else {
             iv_hint_go.setVisibility(GONE);
             et_hint_text.setEnabled(editable);
-            et_hint_text.setHint(hint_text);
+            if (hint_text!=null)
+                et_hint_text.setHint(hint_text);
+            if (edit_text!=null)
+                et_hint_text.setText(edit_text);
+        }
+//        if (hint_text.isEmpty()) {
+//            iv_hint_go.setVisibility(VISIBLE);
+//        } else {
+//            iv_hint_go.setVisibility(GONE);
+//            et_hint_text.setEnabled(editable);
+//            et_hint_text.setHint(hint_text);
+//        }
+    }
+
+    public void setEditText(String editText) {
+        this.edit_text = editText;
+        if (hint_text == null && edit_text == null) {
+            iv_hint_go.setVisibility(VISIBLE);
+        } else {
+            iv_hint_go.setVisibility(GONE);
+            et_hint_text.setEnabled(editable);
+            if (hint_text!=null)
+                et_hint_text.setHint(hint_text);
+            if (edit_text!=null)
+                et_hint_text.setText(edit_text);
         }
     }
 
-    public String getHintText() {
+    public String getText() {
         return et_hint_text.getText().toString();
     }
 }

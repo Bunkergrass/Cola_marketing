@@ -70,8 +70,7 @@
         android:id="@+id/hsv_award_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:key_text="联系地址"
-        app:hint_text=""/>
+        app:key_text="联系地址" />
 
     <com.htmessage.cola_marketing.widget.HintSetView
         android:id="@+id/hsv_award_addr"

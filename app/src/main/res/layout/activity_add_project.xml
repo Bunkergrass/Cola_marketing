@@ -18,32 +18,27 @@
             android:id="@+id/hsv_project_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_list_item"
-            app:key_text="项目名称"
-            app:hint_text=""/>
+            app:key_text="项目名称" />
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_project_team"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_list_item"
-            app:key_text="团队介绍"
-            app:hint_text=""/>
+            app:key_text="团队介绍" />
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_project_desc"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_list_item"
-            app:key_text="案例详情"
-            app:hint_text=""/>
+            app:key_text="案例详情" />
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_project_scene"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_list_item"
-            app:key_text="投放场景"
-            app:hint_text=""/>
+            app:key_text="投放场景" />
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_project_support"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_list_item"
-            app:key_text="协调与支持"
-            app:hint_text=""/>
+            app:key_text="协调与支持" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.homepageFunc.tutor.TutorEditActivity">
+
+    <include layout="@layout/layout_title_bar"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:key_text="导师名称"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="个性签名"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="添加标签"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:key_text="生日"
+        app:editable="false"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_hobby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="兴趣爱好"
+        app:editable="true"/>
+
+    <com.htmessage.cola_marketing.widget.HintSetView
+        android:id="@+id/hsv_tutor_edit_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key_text="个人介绍"
+        app:editable="true"/>
+
+</LinearLayout>

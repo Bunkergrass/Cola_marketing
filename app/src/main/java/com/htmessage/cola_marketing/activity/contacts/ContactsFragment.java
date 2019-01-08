@@ -23,6 +23,7 @@ import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.addfriends.newfriend.NewFriendsActivity;
 import com.htmessage.cola_marketing.activity.chat.group.GroupListActivity;
 import com.htmessage.cola_marketing.activity.contacts.details.UserDetailsActivity;
+import com.htmessage.cola_marketing.activity.homepageFunc.tutor.MyTutorListActivity;
 import com.htmessage.cola_marketing.domain.User;
 import com.htmessage.cola_marketing.widget.HTAlertDialog;
 
@@ -96,6 +97,7 @@ public class ContactsFragment extends Fragment implements ContactsView,View.OnCl
         tv_unread = headView.findViewById(R.id.tv_unread);
         tv_total = footerView.findViewById(R.id.tv_total);
         headView.findViewById(R.id.re_newfriends).setOnClickListener(this);
+        headView.findViewById(R.id.re_tutor).setOnClickListener(this);
         headView.findViewById(R.id.re_chatroom).setOnClickListener(this);
     }
 
@@ -131,6 +133,9 @@ public class ContactsFragment extends Fragment implements ContactsView,View.OnCl
             case R.id.re_newfriends:
                 startActivityForResult(new Intent(getActivity(), NewFriendsActivity.class), 10086);
                 contactsPresenter.clearInvitionCount();
+                break;
+            case R.id.re_tutor:
+                startActivity(new Intent(getActivity(),MyTutorListActivity.class));
                 break;
             case R.id.re_chatroom:
                 startActivity(new Intent(getActivity(), GroupListActivity.class));

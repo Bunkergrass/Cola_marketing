@@ -38,15 +38,13 @@
         android:id="@+id/hsv_project_start"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_list_item"
-        app:key_text="开始时间"
-        app:hint_text=""/>
+        app:key_text="开始时间" />
 
     <com.htmessage.cola_marketing.widget.HintSetView
         android:id="@+id/hsv_project_end"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_list_item"
-        app:key_text="结束时间"
-        app:hint_text=""/>
+        app:key_text="结束时间" />
 
     <LinearLayout
         android:layout_width="match_parent"

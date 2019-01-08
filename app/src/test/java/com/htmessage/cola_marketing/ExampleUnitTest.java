@@ -1,5 +1,7 @@
 package com.htmessage.cola_marketing;
 
+import android.widget.EditText;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

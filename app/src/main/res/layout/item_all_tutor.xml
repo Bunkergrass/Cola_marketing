@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/stroke_bottom">
+
+    <ImageView
+        android:id="@+id/iv_tutor_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/iv_tutor_avatar"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_tutor_name"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/test_text"/>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_tutor_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:background="@color/LightBlue"
+                android:padding="2sp"
+                android:text="@string/test_text"/>
+            <TextView
+                android:id="@+id/tv_tutor_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:background="@color/pink"
+                android:padding="2sp"
+                android:text="@string/test_text"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_tutor_desc"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_pale"
+            android:text="@string/test_text_long"
+            android:maxLines="1"
+            android:maxEms="16"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

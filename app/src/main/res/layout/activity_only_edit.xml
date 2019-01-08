@@ -20,46 +20,40 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:clickable="false"
-            app:key_text="商品名称"
-            app:hint_text=""/>
+            app:key_text="商品名称" />
 
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_only_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            app:key_text="商品价格"
-            app:hint_text=""/>
+            app:key_text="商品价格" />
 
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_only_stock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            app:key_text="库存量"
-            app:hint_text=""/>
+            app:key_text="库存量" />
 
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_only_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:key_text="添加描述"
-            app:hint_text=""/>
+            app:key_text="添加描述" />
 
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_only_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:key_text="添加主图"
-            app:hint_text=""/>
+            app:key_text="添加主图" />
 
         <com.htmessage.cola_marketing.widget.HintSetView
             android:id="@+id/hsv_only_imgs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:key_text="添加图片"
-            app:hint_text=""/>
+            app:key_text="添加图片" />
 
         <FrameLayout
             android:layout_width="match_parent"

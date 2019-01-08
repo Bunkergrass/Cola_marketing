@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.homepageFunc.tutor.MyTutorListActivity">
+
+    <include layout="@layout/layout_title_bar"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_new_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_list_item"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_new_tutor"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/icon_service_tutor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/iv_new_tutor"
+            android:text="新建导师组"
+            android:textColor="@color/text_color_dark"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_none_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/text_color_light"
+        android:text="——暂无导师组——"/>
+
+    <com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout
+        android:id="@+id/srl_my_tutors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:direction="both">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_my_tutors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout>
+
+</LinearLayout>

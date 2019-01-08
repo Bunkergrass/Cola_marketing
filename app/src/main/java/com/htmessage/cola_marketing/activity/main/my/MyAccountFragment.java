@@ -16,6 +16,7 @@ import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.SettingsActivity;
+import com.htmessage.cola_marketing.activity.homepageFunc.tutor.TutorEditActivity;
 import com.htmessage.cola_marketing.activity.main.my.profile.ProfileActivity;
 import com.htmessage.cola_marketing.activity.main.widget.HomepageFuncView;
 import com.htmessage.cola_marketing.activity.main.widget.SettingsView;
@@ -96,6 +97,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 startActivity(new Intent(getActivity(), MyProjectActivity.class));
                 break;
             case R.id.sv_my_tutor:
+                startActivity(new Intent(getActivity(), TutorEditActivity.class));
                 break;
         }
     }
