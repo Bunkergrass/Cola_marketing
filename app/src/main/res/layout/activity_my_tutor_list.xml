@@ -48,7 +48,7 @@
     <com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout
         android:id="@+id/srl_my_tutors"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:direction="both">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_my_tutors"

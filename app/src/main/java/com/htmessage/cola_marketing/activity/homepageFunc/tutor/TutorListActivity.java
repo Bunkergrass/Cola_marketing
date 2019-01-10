@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TutorListActivity extends BaseActivity implements SwipyRefreshLayout.OnRefreshListener {
+    private SwipyRefreshLayout srl_tutors;
+
     private TutorListAdapter adapter;
     private List<JSONObject> list = new ArrayList<>();
 
@@ -31,7 +33,7 @@ public class TutorListActivity extends BaseActivity implements SwipyRefreshLayou
         setContentView(R.layout.activity_tutor_list);
         setTitle("导师列表");
 
-        SwipyRefreshLayout srl_tutors = findViewById(R.id.srl_tutor_list);
+        srl_tutors = findViewById(R.id.srl_tutor_list);
         RecyclerView rv_tutors = findViewById(R.id.rv_tutor_list);
 
         srl_tutors.setOnRefreshListener(this);
@@ -67,6 +69,7 @@ public class TutorListActivity extends BaseActivity implements SwipyRefreshLayou
         new OkHttpUtils(this).post(params, HTConstant.URL_TUTOR_LIST, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+                srl_tutors.setRefreshing(false);
                 Log.d("getTutorList",jsonObject.toString());
                 switch (jsonObject.getInteger("code")) {
                     case 1:
@@ -87,6 +90,7 @@ public class TutorListActivity extends BaseActivity implements SwipyRefreshLayou
 
             @Override
             public void onFailure(String errorMsg) {
+                srl_tutors.setRefreshing(false);
                 Toast.makeText(TutorListActivity.this,R.string.request_failed_msg,Toast.LENGTH_SHORT).show();
             }
         });

@@ -105,9 +105,9 @@ public class TutorDetailActivity extends BaseActivity implements View.OnClickLis
                 JrmfWalletPayClient.walletPay(this,0
                         ,HTApp.getInstance().getUsername() //用户id
                         ,object.getString("creator") //接受者id
-                        ,object.getIntValue("group_money")*100 //支付金额 单位：分
+                        ,object.getFloat("group_money").intValue() *100 //支付金额 单位：分
                         ,"" //订单号
-                        ,"" //商品名称
+                        ,"导师组进群费" //商品名称
                         ,HTApp.getInstance().getThirdToken() //第三方签名,由用户传递过来
                         ,REQUEST_CODE_PAY); //请求码
                 break;

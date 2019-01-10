@@ -23,5 +23,8 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.htmessage.cola_marketing", appContext.getPackageName());
+        EditText editText = new EditText(appContext);
+        editText.setHint("aaa");
+        assertEquals("", editText.getText().toString());
     }
 }

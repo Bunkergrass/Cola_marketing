@@ -498,7 +498,8 @@
         <activity android:name=".activity.homepageFunc.tutor.TutorEditActivity" />
         <activity android:name=".activity.homepageFunc.tutor.NewTutorActivity" />
         <activity android:name=".activity.homepageFunc.squad.SquadListActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.MyTutorListActivity"></activity>
+        <activity android:name=".activity.homepageFunc.tutor.MyTutorListActivity" />
+        <activity android:name=".activity.homepageFunc.tutor.TutorTagActivity"></activity>
     </application>
 
 </manifest>

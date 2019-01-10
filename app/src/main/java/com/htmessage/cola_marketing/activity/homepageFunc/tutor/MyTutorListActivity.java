@@ -31,6 +31,8 @@ import java.util.List;
 
 public class MyTutorListActivity extends BaseActivity implements SwipyRefreshLayout.OnRefreshListener {
     private TextView tv_none_tutor;
+    private SwipyRefreshLayout srl_tutors;
+
     private MyTutorsAdapter adapter;
     private List<JSONObject> list = new ArrayList<>();
     private int page;
@@ -41,12 +43,12 @@ public class MyTutorListActivity extends BaseActivity implements SwipyRefreshLay
         setContentView(R.layout.activity_my_tutor_list);
         setTitle("导师组");
 
-        SwipyRefreshLayout srl = findViewById(R.id.srl_my_tutors);
+        srl_tutors = findViewById(R.id.srl_my_tutors);
         RecyclerView rl_tutors = findViewById(R.id.rv_my_tutors);
         tv_none_tutor = findViewById(R.id.tv_none_tutor);
         RelativeLayout rl_new_tutor = findViewById(R.id.rl_new_tutor);
 
-        srl.setOnRefreshListener(this);
+        srl_tutors.setOnRefreshListener(this);
 
         adapter = new MyTutorsAdapter(this,list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -88,6 +90,7 @@ public class MyTutorListActivity extends BaseActivity implements SwipyRefreshLay
         new OkHttpUtils(this).post(params, HTConstant.URL_GROUP_LIST, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+                srl_tutors.setRefreshing(false);
                 Log.d("getMyTutorList",jsonObject.toString());
                 switch (jsonObject.getInteger("code")) {
                     case 1:

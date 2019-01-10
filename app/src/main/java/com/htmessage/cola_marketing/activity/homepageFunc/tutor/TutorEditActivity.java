@@ -1,9 +1,12 @@
 package com.htmessage.cola_marketing.activity.homepageFunc.tutor;
 
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
@@ -16,7 +19,8 @@ import com.htmessage.cola_marketing.utils.Param;
 import com.htmessage.cola_marketing.widget.HintSetView;
 
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -24,7 +28,9 @@ import java.util.List;
 
 public class TutorEditActivity extends BaseActivity {
     HintSetView hsv_name,hsv_sign,hsv_tag,hsv_desc,hsv_birth,hsv_hobby;
-    private static final String dateFormat = "yyyy-MM-dd";
+    Long birthTime = 0L;
+
+    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +44,6 @@ public class TutorEditActivity extends BaseActivity {
         hsv_desc = findViewById(R.id.hsv_tutor_edit_desc);
         hsv_birth = findViewById(R.id.hsv_tutor_edit_birth);
         hsv_hobby = findViewById(R.id.hsv_tutor_edit_hobby);
-
-        showRightButton("保存", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postTutorInform();
-            }
-        });
     }
 
     private void setView(JSONObject object) {
@@ -54,17 +53,60 @@ public class TutorEditActivity extends BaseActivity {
         String tutor_mysign = object.getString("tutor_mysign");
         String sign = object.getString("tutor_sign");
 
-        hsv_name.setHintText(tutor_name);
-        hsv_hobby.setHintText(like);
-        hsv_sign.setHintText(sign);
-        hsv_desc.setHintText(tutor_mysign);
-        hsv_birth.setHintText(new SimpleDateFormat(dateFormat).format(new Date(birth)));
+        checkEmpty(hsv_name,tutor_name);
+        checkEmpty(hsv_hobby,like);
+        checkEmpty(hsv_sign,sign);
+        checkEmpty(hsv_desc,tutor_mysign);
+        hsv_birth.setEditText(format.format(new Date(birth)));
+        birthTime = birth;
+
+        showRightButton("保存", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postTutorInform();
+            }
+        });
+        hsv_birth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDataPickerDialog(hsv_birth);
+            }
+        });
+        hsv_tag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TutorEditActivity.this,TutorTagActivity.class));
+            }
+        });
+    }
+
+    private void checkEmpty(HintSetView hsv,String str) {
+        if (str.isEmpty())
+            hsv.setHintText(getString(R.string.please_input));
+        else
+            hsv.setEditText(str);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         requestTutorInform();
+    }
+
+    private void showDataPickerDialog(final HintSetView hintSetView) {
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String strTime = year + "-" + (month+1) + "-" + dayOfMonth;
+                hintSetView.setEditText(strTime);
+                try {
+                    birthTime = format.parse(strTime).getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        },1990,1,1);
+        dialog.show();
     }
 
     private void requestTutorInform() {
@@ -80,6 +122,7 @@ public class TutorEditActivity extends BaseActivity {
                         break;
                     default:
                         Toast.makeText(TutorEditActivity.this,"您尚未成为导师",Toast.LENGTH_SHORT).show();
+                        finish();
                         break;
                 }
             }
@@ -94,10 +137,10 @@ public class TutorEditActivity extends BaseActivity {
     private void postTutorInform() {
         List<Param> params = new ArrayList<>();
         params.add(new Param("uid",HTApp.getInstance().getUsername()));
-        params.add(new Param("tutor_name",""));
-        params.add(new Param("tutor_mysign",""));
-        params.add(new Param("birthday",""));
-        params.add(new Param("like",""));
+        params.add(new Param("tutor_name",hsv_name.getText()));
+        params.add(new Param("tutor_mysign",hsv_desc.getText()));
+        params.add(new Param("birthday",birthTime+""));
+        params.add(new Param("like",hsv_hobby.getText()));
         new OkHttpUtils(this).post(params, HTConstant.URL_UP_TUTOR, new OkHttpUtils.HttpCallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
