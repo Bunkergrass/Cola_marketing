@@ -32,7 +32,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_top_groups"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_list_item"
@@ -91,6 +90,7 @@
         android:id="@+id/srl_squads"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         app:direction="both">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_squad_list"

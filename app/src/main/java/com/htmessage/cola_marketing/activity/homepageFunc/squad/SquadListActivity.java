@@ -2,9 +2,11 @@ package com.htmessage.cola_marketing.activity.homepageFunc.squad;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -17,11 +19,16 @@ import com.htmessage.cola_marketing.HTApp;
 import com.htmessage.cola_marketing.HTConstant;
 import com.htmessage.cola_marketing.R;
 import com.htmessage.cola_marketing.activity.BaseActivity;
+import com.htmessage.cola_marketing.activity.chat.ChatActivity;
 import com.htmessage.cola_marketing.activity.chat.group.GroupAddMembersActivity;
+import com.htmessage.cola_marketing.utils.ACache;
 import com.htmessage.cola_marketing.utils.OkHttpUtils;
 import com.htmessage.cola_marketing.utils.Param;
+import com.htmessage.cola_marketing.utils.RecyclerItemClickListener;
+import com.htmessage.cola_marketing.widget.HTAlertDialog;
 import com.htmessage.cola_marketing.widget.swipyrefresh.SwipyRefreshLayout;
 import com.htmessage.sdk.model.HTGroup;
+import com.htmessage.sdk.utils.MessageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +43,8 @@ public class SquadListActivity extends BaseActivity implements View.OnClickListe
     private List<JSONObject> list = new ArrayList<>();
     private int page = 1;
 
+    private static final String KEY_SQUAD_PROMOTE = HTApp.getInstance().getUsername()+"SQUAD_PROMOTE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +53,7 @@ public class SquadListActivity extends BaseActivity implements View.OnClickListe
 
 //        ll_my_groups = findViewById(R.id.ll_my_groups);
         ll_new_group = findViewById(R.id.ll_new_group);
-//        ll_top_groups = findViewById(R.id.ll_top_groups);
+        ll_top_groups = findViewById(R.id.ll_top_groups);
         rv_squads = findViewById(R.id.rv_squad_list);
         srl_squads = findViewById(R.id.srl_squads);
         tv_none = findViewById(R.id.tv_none_squad);
@@ -54,11 +63,42 @@ public class SquadListActivity extends BaseActivity implements View.OnClickListe
     private void setView() {
         srl_squads.setOnRefreshListener(this);
         ll_new_group.setOnClickListener(this);
+        ll_top_groups.setOnClickListener(this);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         adapter = new SquadListAdapter(this,list);
         rv_squads.setLayoutManager(manager);
         rv_squads.setAdapter(adapter);
+
+        rv_squads.addOnItemTouchListener(new RecyclerItemClickListener(this, rv_squads, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onClick(int position, View itemView) {
+                startActivity(new Intent(SquadListActivity.this, ChatActivity.class)
+                        .putExtra("userId",list.get(position).getString("gid"))
+                        .putExtra("chatType", MessageUtils.CHAT_GROUP));
+            }
+
+            @Override
+            public void onLongClick(int position, View itemView) {
+                showmDialog(position);
+            }
+        }));
+    }
+
+    private void showmDialog(final int pos) {
+        HTAlertDialog dialog = new HTAlertDialog(SquadListActivity.this,null
+                ,new String[]{"置顶"});
+        dialog.init(new HTAlertDialog.OnItemClickListner() {
+            @Override
+            public void onClick(int position) {
+                switch (position) {
+                    case 0:
+                        ACache.get(SquadListActivity.this).put(KEY_SQUAD_PROMOTE,list.get(pos));//缓存至ACache，JSONObject
+                        Toast.makeText(SquadListActivity.this,"已置顶",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -72,7 +112,10 @@ public class SquadListActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_new_group:
-                startActivity(new Intent(SquadListActivity.this, GroupAddMembersActivity.class));
+                startActivity(new Intent(SquadListActivity.this, NewSquadActivity.class));
+                break;
+            case R.id.ll_top_groups:
+                startActivity(new Intent(SquadListActivity.this, SquadClassifyActivity.class));
                 break;
         }
     }

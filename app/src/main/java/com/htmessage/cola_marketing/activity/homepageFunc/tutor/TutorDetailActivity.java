@@ -66,13 +66,13 @@ public class TutorDetailActivity extends BaseActivity implements View.OnClickLis
         String creator = object.getString("creator");
         String tutor_name = object.getString("tutor_name");
         String group_num = object.getString("group_num");
-        String descri = object.getString("descri");
+        String group_introduce = object.getString("group_introduce");
         JSONArray label = object.getJSONArray("label");
         String group_money = object.getString("group_money");
 
         tv_name.setText(tutor_name);
         tv_id.setText("群ID：" + group_num);
-        tv_desc.setText("群介绍：" + descri);
+        tv_desc.setText("群介绍：" + group_introduce);
         btn_pay.setText("支付"+group_money+"元入群");
         if (!label.isEmpty())
             tv_tag.setText(label.getJSONObject(0).getString("label_name"));

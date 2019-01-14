@@ -55,14 +55,14 @@ public class SquadListAdapter extends RecyclerView.Adapter<SquadListAdapter.View
         String imgurl = object.getString("imgurl");
         String name = object.getString("name");
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, ChatActivity.class)
-                        .putExtra("userId",gid)
-                        .putExtra("chatType", MessageUtils.CHAT_GROUP));
-            }
-        });
+//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                context.startActivity(new Intent(context, ChatActivity.class)
+//                        .putExtra("userId",gid)
+//                        .putExtra("chatType", MessageUtils.CHAT_GROUP));
+//            }
+//        });
         viewHolder.tv_name.setText(name);
         RequestOptions options = new RequestOptions().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar);
         Glide.with(context).load(imgurl).apply(options).into(viewHolder.iv_avatar);

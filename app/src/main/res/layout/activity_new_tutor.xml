@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.homepageFunc.tutor.NewTutorActivity">
+    android:orientation="vertical">
 
     <include layout="@layout/layout_title_bar"/>
 
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        app:key_text="导师组名称"
+        app:key_text="小组名称"
         app:hint_text="请输入"
         app:editable="true"/>
 

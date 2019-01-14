@@ -15,6 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.htmessage.cola_marketing.R;
+import com.htmessage.cola_marketing.activity.chat.ChatActivity;
+import com.htmessage.sdk.utils.MessageUtils;
 
 import java.util.List;
 
@@ -54,6 +56,8 @@ public class TutorListAdapter extends RecyclerView.Adapter<TutorListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final JSONObject object = list.get(i);
         final String tutor_id = object.getString("tutor_id");
+        final int is_group_members = object.getInteger("is_group_members");
+        final String gid = object.getString("gid");
         String tutor_name = object.getString("tutor_name");
         String avatar = object.getString("avatar");
         String tutor_mysign = object.getString("tutor_mysign");
@@ -75,8 +79,14 @@ public class TutorListAdapter extends RecyclerView.Adapter<TutorListAdapter.View
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context,TutorDetailActivity.class)
-                        .putExtra("tutor_json",object.toJSONString()));
+                if (is_group_members == 1){
+                    context.startActivity(new Intent(context,TutorDetailActivity.class)
+                            .putExtra("tutor_json",object.toJSONString()));
+                } else {
+                    context.startActivity(new Intent(context,ChatActivity.class)
+                            .putExtra("userId",gid)
+                            .putExtra("chatType", MessageUtils.CHAT_GROUP));
+                }
             }
         });
     }

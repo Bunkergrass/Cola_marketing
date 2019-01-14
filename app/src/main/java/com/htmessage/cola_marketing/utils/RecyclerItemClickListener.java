@@ -1,4 +1,4 @@
-package com.htmessage.cola_marketing.activity.myLists;
+package com.htmessage.cola_marketing.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * a class for RecyclerView ClickListener
+ * use it wherever you need RecyclerView response click
+ */
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
     private OnItemClickListener mListener;
     private GestureDetector mGestureDetector;

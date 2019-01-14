@@ -493,13 +493,45 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.homepageFunc.tutor.TutorListActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.TutorDetailActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.TutorEditActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.NewTutorActivity" />
-        <activity android:name=".activity.homepageFunc.squad.SquadListActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.MyTutorListActivity" />
-        <activity android:name=".activity.homepageFunc.tutor.TutorTagActivity"></activity>
+        <!-- 导师 -->
+        <activity android:name=".activity.homepageFunc.tutor.TutorListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.tutor.TutorDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.tutor.TutorEditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.tutor.NewTutorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.tutor.MyTutorListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.tutor.TutorTagActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <!-- 战略小组 -->
+        <activity android:name=".activity.homepageFunc.squad.SquadListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.squad.NewSquadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activity.homepageFunc.squad.SquadClassifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize"/>
+
     </application>
 
 </manifest>
